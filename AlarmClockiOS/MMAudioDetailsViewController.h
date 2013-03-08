@@ -1,5 +1,5 @@
 //
-//  MMFirstViewController.h
+//  MMSecondViewController.h
 //  AlarmClockiOS
 //
 //  Created by James Donner on 3/7/13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MMFirstViewController : UIViewController
+@interface MMAudioDetailsViewController : UIViewController
 
 @end

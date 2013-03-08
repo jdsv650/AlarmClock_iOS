@@ -1,5 +1,5 @@
 //
-//  MMSecondViewController.h
+//  MMAlarmMainViewController.h
 //  AlarmClockiOS
 //
 //  Created by James Donner on 3/7/13.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MMSecondViewController : UIViewController
+@interface MMAlarmMainViewController : UIViewController <UIAlertViewDelegate>
+
+@property NSMutableArray *alarms;
 
 @end

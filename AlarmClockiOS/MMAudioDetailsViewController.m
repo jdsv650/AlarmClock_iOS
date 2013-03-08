@@ -1,18 +1,18 @@
 //
-//  MMFirstViewController.m
+//  MMSecondViewController.m
 //  AlarmClockiOS
 //
 //  Created by James Donner on 3/7/13.
 //  Copyright (c) 2013 jdsv650. All rights reserved.
 //
 
-#import "MMFirstViewController.h"
+#import "MMAudioDetailsViewController.h"
 
-@interface MMFirstViewController ()
+@interface MMAudioDetailsViewController ()
 
 @end
 
-@implementation MMFirstViewController
+@implementation MMAudioDetailsViewController
 
 - (void)viewDidLoad
 {
