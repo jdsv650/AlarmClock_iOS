@@ -20,7 +20,7 @@
 		1A01D88016E9764700E855C5 /* AlarmTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A01D87F16E9764700E855C5 /* AlarmTimeViewController.m */; };
 		1A01D88216E9764700E855C5 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A01D88116E9764700E855C5 /* first.png */; };
 		1A01D88416E9764700E855C5 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A01D88316E9764700E855C5 /* first@2x.png */; };
-		1A01D88716E9764700E855C5 /* MMAudioDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A01D88616E9764700E855C5 /* MMAudioDetailsViewController.m */; };
+		1A01D88716E9764700E855C5 /* AudibleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A01D88616E9764700E855C5 /* AudibleViewController.m */; };
 		1A01D88916E9764700E855C5 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A01D88816E9764700E855C5 /* second.png */; };
 		1A01D88B16E9764700E855C5 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A01D88A16E9764700E855C5 /* second@2x.png */; };
 		1A01D89416E97EE200E855C5 /* SnoozeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A01D89216E97EE200E855C5 /* SnoozeViewController.m */; };
@@ -66,6 +66,8 @@
 		1A99704416E98DC0009F6C6B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A99704316E98DC0009F6C6B /* AVFoundation.framework */; };
 		1A99704616E98DCE009F6C6B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A99704516E98DCE009F6C6B /* AudioToolbox.framework */; };
 		1A99704916E9AFFB009F6C6B /* MMTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A99704816E9AFFB009F6C6B /* MMTableViewController.m */; };
+		1A99704F16EA6E13009F6C6B /* MMAlarmDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A99704E16EA6E13009F6C6B /* MMAlarmDetails.m */; };
+		1A99705516EE98BD009F6C6B /* VisualVibrateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A99705416EE98BD009F6C6B /* VisualVibrateViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,8 +89,8 @@
 		1A01D87F16E9764700E855C5 /* AlarmTimeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlarmTimeViewController.m; sourceTree = "<group>"; };
 		1A01D88116E9764700E855C5 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		1A01D88316E9764700E855C5 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		1A01D88516E9764700E855C5 /* MMAudioDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMAudioDetailsViewController.h; sourceTree = "<group>"; };
-		1A01D88616E9764700E855C5 /* MMAudioDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMAudioDetailsViewController.m; sourceTree = "<group>"; };
+		1A01D88516E9764700E855C5 /* AudibleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudibleViewController.h; sourceTree = "<group>"; };
+		1A01D88616E9764700E855C5 /* AudibleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudibleViewController.m; sourceTree = "<group>"; };
 		1A01D88816E9764700E855C5 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		1A01D88A16E9764700E855C5 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		1A01D89116E97EE200E855C5 /* SnoozeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnoozeViewController.h; sourceTree = "<group>"; };
@@ -137,6 +139,10 @@
 		1A99704516E98DCE009F6C6B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		1A99704716E9AFFB009F6C6B /* MMTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMTableViewController.h; sourceTree = "<group>"; };
 		1A99704816E9AFFB009F6C6B /* MMTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMTableViewController.m; sourceTree = "<group>"; };
+		1A99704D16EA6E13009F6C6B /* MMAlarmDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMAlarmDetails.h; sourceTree = "<group>"; };
+		1A99704E16EA6E13009F6C6B /* MMAlarmDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMAlarmDetails.m; sourceTree = "<group>"; };
+		1A99705316EE98BD009F6C6B /* VisualVibrateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisualVibrateViewController.h; sourceTree = "<group>"; };
+		1A99705416EE98BD009F6C6B /* VisualVibrateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisualVibrateViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,16 +200,16 @@
 				1A99704816E9AFFB009F6C6B /* MMTableViewController.m */,
 				1A99703E16E9875D009F6C6B /* MMAlarmMainViewController.h */,
 				1A99703F16E9875D009F6C6B /* MMAlarmMainViewController.m */,
+				1A99704D16EA6E13009F6C6B /* MMAlarmDetails.h */,
+				1A99704E16EA6E13009F6C6B /* MMAlarmDetails.m */,
 				1A01D87E16E9764700E855C5 /* AlarmTimeViewController.h */,
 				1A01D87F16E9764700E855C5 /* AlarmTimeViewController.m */,
 				1A01D89116E97EE200E855C5 /* SnoozeViewController.h */,
 				1A01D89216E97EE200E855C5 /* SnoozeViewController.m */,
-				1A01D88116E9764700E855C5 /* first.png */,
-				1A01D88316E9764700E855C5 /* first@2x.png */,
-				1A01D88516E9764700E855C5 /* MMAudioDetailsViewController.h */,
-				1A01D88616E9764700E855C5 /* MMAudioDetailsViewController.m */,
-				1A01D88816E9764700E855C5 /* second.png */,
-				1A01D88A16E9764700E855C5 /* second@2x.png */,
+				1A01D88516E9764700E855C5 /* AudibleViewController.h */,
+				1A01D88616E9764700E855C5 /* AudibleViewController.m */,
+				1A99705316EE98BD009F6C6B /* VisualVibrateViewController.h */,
+				1A99705416EE98BD009F6C6B /* VisualVibrateViewController.m */,
 				1A01D86A16E9764700E855C5 /* Supporting Files */,
 			);
 			path = AlarmClockiOS;
@@ -212,6 +218,10 @@
 		1A01D86A16E9764700E855C5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1A01D88A16E9764700E855C5 /* second@2x.png */,
+				1A01D88816E9764700E855C5 /* second.png */,
+				1A01D88316E9764700E855C5 /* first@2x.png */,
+				1A01D88116E9764700E855C5 /* first.png */,
 				1A01D8D916E981A500E855C5 /* Sounds */,
 				1A01D89616E9819700E855C5 /* Icons */,
 				1A01D86B16E9764700E855C5 /* AlarmClockiOS-Info.plist */,
@@ -389,10 +399,12 @@
 				1A01D87016E9764700E855C5 /* main.m in Sources */,
 				1A01D87416E9764700E855C5 /* MMAppDelegate.m in Sources */,
 				1A01D88016E9764700E855C5 /* AlarmTimeViewController.m in Sources */,
-				1A01D88716E9764700E855C5 /* MMAudioDetailsViewController.m in Sources */,
+				1A01D88716E9764700E855C5 /* AudibleViewController.m in Sources */,
 				1A01D89416E97EE200E855C5 /* SnoozeViewController.m in Sources */,
 				1A99704116E9875D009F6C6B /* MMAlarmMainViewController.m in Sources */,
 				1A99704916E9AFFB009F6C6B /* MMTableViewController.m in Sources */,
+				1A99704F16EA6E13009F6C6B /* MMAlarmDetails.m in Sources */,
+				1A99705516EE98BD009F6C6B /* VisualVibrateViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

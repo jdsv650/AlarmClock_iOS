@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MMAlarmDetails.h"
 
 @interface AlarmTimeViewController : UIViewController
 
 @property NSMutableArray *alarms;
+@property MMAlarmDetails *myAlarm;
 
 @end

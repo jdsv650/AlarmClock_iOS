@@ -8,10 +8,12 @@
 
 #import "MMTableViewController.h"
 #import "MMAlarmMainViewController.h"
+#import "MMAlarmDetails.h"
 
 @interface MMTableViewController ()
 {
     MMAlarmMainViewController *avc;
+
 }
 - (IBAction)returnToMainPage:(id)sender;
 
@@ -20,6 +22,8 @@
 
 @implementation MMTableViewController
 @synthesize alarms;
+@synthesize editAlarm;
+@synthesize alarmNumberToEdit;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -36,6 +40,7 @@
 
     avc = (MMAlarmMainViewController*) self.presentingViewController;
     alarms = avc.alarms;
+    
 	
 }
 
@@ -43,6 +48,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    alarmNumberToEdit = [[[self tableView] indexPathForSelectedRow] row];
+    editAlarm = [alarms objectAtIndex:alarmNumberToEdit];
 }
 
 #pragma mark - Table view data source
@@ -69,7 +80,15 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [alarms objectAtIndex:indexPath.row]];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    [formatter setDateFormat:@"MM/dd/yyyy hh:mm:ss a V"];
+    
+    //alarmNumberToEdit = indexPath.row;
+    //editAlarm = [alarms objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = [formatter stringFromDate:[[alarms objectAtIndex:indexPath.row] alarmDateTime]];
+   // cell.textLabel.text = [NSString stringWithFormat:@"%@", [[alarms objectAtIndex:indexPath.row] alarmDateTime]];
     return cell;
 }
 
@@ -96,33 +115,13 @@
 }
 */
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    
+    
 }
 
 - (IBAction)returnToMainPage:(id)sender {

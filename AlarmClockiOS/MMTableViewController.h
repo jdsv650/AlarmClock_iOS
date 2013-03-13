@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MMAlarmDetails.h"  
 
 @interface MMTableViewController : UITableViewController
 
 @property NSMutableArray *alarms;
+@property MMAlarmDetails *editAlarm;
+@property NSInteger alarmNumberToEdit;
 
 @end

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MMAlarmDetails.h"
 
 @interface SnoozeViewController : UIViewController
+
+@property MMAlarmDetails *myAlarm;
 
 @end

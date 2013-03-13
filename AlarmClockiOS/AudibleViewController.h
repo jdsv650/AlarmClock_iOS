@@ -1,5 +1,5 @@
 //
-//  MMAlarmMainViewController.h
+//  MMSecondViewController.h
 //  AlarmClockiOS
 //
 //  Created by James Donner on 3/7/13.
@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "MMAlarmDetails.h"
 
-@interface MMAlarmMainViewController : UIViewController <UIAlertViewDelegate>
+@interface AudibleViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITabBarDelegate>
 
-@property NSMutableArray *alarms;
+@property (strong, nonatomic) NSArray* sounds;
 @property MMAlarmDetails *myNewAlarm;
 
 @end
