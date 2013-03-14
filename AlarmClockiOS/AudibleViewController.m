@@ -13,6 +13,7 @@
 
 @interface AudibleViewController ()
 {
+    __weak IBOutlet UIImageView *audibleImageViewOutlet;
     __weak IBOutlet UISlider *volumeOutlet;
     __weak IBOutlet UIPickerView *soundPickerOutlet;
     __weak IBOutlet UISwitch *volumeOnOffOutlet;
@@ -50,8 +51,13 @@
     volumeOutlet.value = myNewAlarm.alarmVolume;
     if(myNewAlarm.alarmVolume == 0)
     {
-       volumeOnOffOutlet.on = NO; 
+       volumeOnOffOutlet.on = NO;
+       audibleImageViewOutlet.image = [UIImage imageNamed:@"bell_off.png"];
     }
+    else
+         audibleImageViewOutlet.image = [UIImage imageNamed:@"bell.png"];
+    
+   
 
     int num = 0;
     if([[myNewAlarm alarmSound] isEqualToString:@"Alarm Clock"])
@@ -116,8 +122,7 @@
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
- // if(item.tag == 1)
-      NSLog(@"ITEM 1 selected");
+
 }
 
 
@@ -128,11 +133,13 @@
     {
         volumeOutlet.value = 0.5f;
         myNewAlarm.alarmVolume = 0.5f;
+        audibleImageViewOutlet.image = [UIImage imageNamed:@"bell.png"];
     }
     else
     {
         volumeOutlet.value = 0.0f;
         myNewAlarm.alarmVolume = 0.0f;
+        audibleImageViewOutlet.image = [UIImage imageNamed:@"bell_off.png"];
     }
 }
 
@@ -141,11 +148,13 @@
     {
         volumeOnOffOutlet.on = NO;
         myNewAlarm.alarmVolume = 0.0f;
+        audibleImageViewOutlet.image = [UIImage imageNamed:@"bell_off.png"];
     }
     else
     {
         volumeOnOffOutlet.on = YES;
         myNewAlarm.alarmVolume = volumeOutlet.value;
+        audibleImageViewOutlet.image = [UIImage imageNamed:@"bell.png"];
     }
 }
 @end

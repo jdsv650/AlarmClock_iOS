@@ -13,6 +13,7 @@
 @interface SnoozeViewController ()
 {
     
+    __weak IBOutlet UIImageView *snoozeImageViewOutlet;
     __weak IBOutlet UISwitch *snoozeSwitch;
     __weak IBOutlet UILabel *snoozeLabel;
     __weak IBOutlet UIStepper *snoozeStepper;
@@ -45,6 +46,13 @@
     }
     
     snoozeSwitch.on = myAlarm.isSnoozeEnabled;
+    if(snoozeSwitch.on == YES)
+    {
+        snoozeImageViewOutlet.image = [UIImage imageNamed:@"control_pause.png"];
+    }
+    else
+        snoozeImageViewOutlet.image = [UIImage imageNamed:@"control_off.png"];
+    
     snoozeLabel.text = [NSString stringWithFormat:@"%d", myAlarm.snoozeDuration];
     
 }
@@ -73,12 +81,14 @@
         snoozeStepper.enabled = NO;
         myAlarm.isSnoozeEnabled = NO;
         snoozeLabel.text = @"Snooze Off";
+        snoozeImageViewOutlet.image = [UIImage imageNamed:@"control _off.png"];
     }
     else
     {
         snoozeStepper.enabled = YES;
         myAlarm.isSnoozeEnabled = YES;
         snoozeLabel.text = [NSString stringWithFormat:@"%d", (int) snoozeStepper.value];
+        snoozeImageViewOutlet.image = [UIImage imageNamed:@"control_pause.png"];
     }
     
 }

@@ -96,7 +96,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pa8-aF-xcD">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Back">
+                                <state key="normal" title=" Back" image="cancel.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -134,6 +134,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <connections>
                         <outlet property="alarmDatePickerOutlet" destination="T98-6i-fbj" id="Fjb-er-Kbc"/>
                         <outlet property="alarmOnOffToggleOutlet" destination="Zwx-Bc-Scw" id="1DL-64-SmD"/>
+                        <outlet property="removeButtonOutlet" destination="SP4-R8-BZu" id="rjz-qk-lN8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10" sceneMemberID="firstResponder"/>
@@ -183,26 +184,43 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <action selector="volumeChanged:" destination="3" eventType="valueChanged" id="RMs-e6-dl5"/>
                                 </connections>
                             </slider>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bell.png" translatesAutoresizingMaskIntoConstraints="NO" id="Te3-2y-NYz">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Fgt-Qj-KMl"/>
+                                    <constraint firstAttribute="width" constant="40" id="ecf-N2-j1t"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="volume_control_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="JRr-pZ-ECl">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="A3w-OP-yXB"/>
+                                    <constraint firstAttribute="height" constant="40" id="Gh1-pB-So0"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Ptd-49-49o" firstAttribute="trailing" secondItem="17" secondAttribute="trailing" type="default" id="2ff-Hg-d7P"/>
+                            <constraint firstItem="Te3-2y-NYz" firstAttribute="top" secondItem="17" secondAttribute="top" constant="20" symbolic="YES" type="default" id="34E-63-Uug"/>
                             <constraint firstItem="7Q7-Wf-OSe" firstAttribute="top" secondItem="17" secondAttribute="top" constant="31" id="5CI-3p-g3f"/>
                             <constraint firstItem="QFo-dX-sH2" firstAttribute="top" secondItem="7Q7-Wf-OSe" secondAttribute="top" type="default" id="Guw-0d-Md4"/>
-                            <constraint firstItem="Y3I-P7-7XC" firstAttribute="centerY" secondItem="bVu-eB-y9h" secondAttribute="centerY" type="default" id="d8i-Fy-V3n"/>
+                            <constraint firstItem="JRr-pZ-ECl" firstAttribute="centerY" secondItem="Y3I-P7-7XC" secondAttribute="centerY" type="default" id="LWa-V6-P9F"/>
+                            <constraint firstItem="JRr-pZ-ECl" firstAttribute="leading" secondItem="17" secondAttribute="leading" constant="112" id="ODJ-KA-iSF"/>
+                            <constraint firstAttribute="trailing" secondItem="QFo-dX-sH2" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Qwv-3j-Nn1"/>
+                            <constraint firstItem="JRr-pZ-ECl" firstAttribute="centerY" secondItem="bVu-eB-y9h" secondAttribute="centerY" type="default" id="X8O-4r-j1y"/>
+                            <constraint firstAttribute="trailing" secondItem="bVu-eB-y9h" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="dbe-ii-Rid"/>
                             <constraint firstItem="Ptd-49-49o" firstAttribute="top" secondItem="17" secondAttribute="top" constant="91" id="eQH-rD-gAu"/>
                             <constraint firstItem="7Q7-Wf-OSe" firstAttribute="bottom" secondItem="QFo-dX-sH2" secondAttribute="bottom" type="default" id="fQs-fs-3Ys"/>
-                            <constraint firstAttribute="bottom" secondItem="Y3I-P7-7XC" secondAttribute="bottom" constant="45" id="ghH-ou-ff5"/>
+                            <constraint firstItem="Te3-2y-NYz" firstAttribute="leading" secondItem="17" secondAttribute="leading" constant="152" id="iRV-QQ-jNP"/>
                             <constraint firstItem="7Q7-Wf-OSe" firstAttribute="leading" secondItem="17" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="lOO-2a-YKb"/>
                             <constraint firstItem="Y3I-P7-7XC" firstAttribute="leading" secondItem="17" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="lzs-tT-Y8T"/>
                             <constraint firstItem="Ptd-49-49o" firstAttribute="leading" secondItem="17" secondAttribute="leading" type="default" id="mA3-dc-iSo"/>
-                            <constraint firstAttribute="trailing" secondItem="QFo-dX-sH2" secondAttribute="trailing" constant="71" id="mw0-xS-cfk"/>
-                            <constraint firstAttribute="trailing" secondItem="bVu-eB-y9h" secondAttribute="trailing" constant="45" id="tWn-WF-ISQ"/>
+                            <constraint firstAttribute="bottom" secondItem="JRr-pZ-ECl" secondAttribute="bottom" constant="40" id="tQl-tr-Cpw"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="Audible" id="chV-kU-rUs"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="audibleImageViewOutlet" destination="Te3-2y-NYz" id="62o-ox-TvQ"/>
                         <outlet property="soundPickerOutlet" destination="Ptd-49-49o" id="IY9-uu-mbn"/>
                         <outlet property="volumeOnOffOutlet" destination="QFo-dX-sH2" id="BDp-vc-kP4"/>
                         <outlet property="volumeOutlet" destination="bVu-eB-y9h" id="Ad6-Fy-faS"/>
@@ -308,8 +326,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <tabBarItem key="tabBarItem" title="Visual-Vibrate" id="S5u-jD-zfb"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="flashlightImageViewOutlet" destination="sVc-Gl-864" id="9EB-Yf-f8M"/>
                         <outlet property="flashlightSwitch" destination="aoW-Q7-t0V" id="x0R-e2-o6F"/>
                         <outlet property="messageTextField" destination="ngU-aD-Lev" id="I1Y-Dm-V9Z"/>
+                        <outlet property="vibrateImageViewOutlet" destination="6wl-yx-Ffp" id="m6B-aU-rI7"/>
                         <outlet property="vibrateSwitch" destination="aXN-NB-v21" id="mZk-bS-7JY"/>
                     </connections>
                 </viewController>
@@ -358,24 +378,33 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="control _off.png" translatesAutoresizingMaskIntoConstraints="NO" id="oSG-d1-ZeV">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="WIl-iv-Uxp"/>
+                                    <constraint firstAttribute="width" constant="40" id="tib-FH-R6Y"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="fmj-kH-O0c" firstAttribute="top" secondItem="7iP-4a-oE0" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="4OI-fa-Juw"/>
                             <constraint firstItem="7iP-4a-oE0" firstAttribute="centerX" secondItem="fmj-kH-O0c" secondAttribute="centerX" type="default" id="6DZ-45-ab8"/>
                             <constraint firstItem="oSq-PZ-cao" firstAttribute="top" secondItem="7iP-4a-oE0" secondAttribute="top" type="default" id="6h7-dO-bSB"/>
-                            <constraint firstItem="tHC-MI-yO3" firstAttribute="centerX" secondItem="Ocb-3L-LLl" secondAttribute="centerX" type="default" id="8Zf-NB-OJQ"/>
-                            <constraint firstItem="Efd-Mc-raw" firstAttribute="top" secondItem="Ocb-3L-LLl" secondAttribute="top" constant="35" id="Ddu-z5-pbO"/>
                             <constraint firstItem="7iP-4a-oE0" firstAttribute="top" secondItem="Ocb-3L-LLl" secondAttribute="top" constant="109" id="F2B-BN-CKj"/>
+                            <constraint firstItem="Efd-Mc-raw" firstAttribute="centerY" secondItem="oSG-d1-ZeV" secondAttribute="centerY" type="default" id="I5g-3H-ZFk"/>
                             <constraint firstAttribute="trailing" secondItem="oSq-PZ-cao" secondAttribute="trailing" constant="53" id="Odl-75-qou"/>
                             <constraint firstItem="fmj-kH-O0c" firstAttribute="leading" secondItem="Ocb-3L-LLl" secondAttribute="leading" constant="25" id="TxR-1t-1zc"/>
                             <constraint firstItem="tHC-MI-yO3" firstAttribute="bottom" secondItem="Efd-Mc-raw" secondAttribute="bottom" type="default" id="W5O-nP-rHL"/>
+                            <constraint firstItem="oSG-d1-ZeV" firstAttribute="top" secondItem="Ocb-3L-LLl" secondAttribute="top" constant="31" id="XNX-30-Hg9"/>
+                            <constraint firstItem="oSG-d1-ZeV" firstAttribute="centerX" secondItem="Ocb-3L-LLl" secondAttribute="centerX" type="default" id="aTi-Bs-kCC"/>
+                            <constraint firstAttribute="trailing" secondItem="tHC-MI-yO3" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="lcf-dB-oR1"/>
                             <constraint firstItem="7iP-4a-oE0" firstAttribute="leading" secondItem="Efd-Mc-raw" secondAttribute="leading" type="default" id="qXO-W1-GRn"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="2" title="Snooze" id="Qux-la-T8l"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="snoozeImageViewOutlet" destination="oSG-d1-ZeV" id="heP-AN-Pgb"/>
                         <outlet property="snoozeLabel" destination="fmj-kH-O0c" id="T30-wZ-EBa"/>
                         <outlet property="snoozeStepper" destination="oSq-PZ-cao" id="MKN-1s-N1O"/>
                         <outlet property="snoozeSwitch" destination="tHC-MI-yO3" id="brs-5c-FZO"/>
@@ -522,14 +551,82 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     <resources>
         <image name="add.png" width="16" height="16"/>
         <image name="alarm.png" width="16" height="16"/>
+        <image name="bell.png" width="16" height="16"/>
+        <image name="cancel.png" width="16" height="16"/>
         <image name="cascade.png" width="16" height="16"/>
         <image name="comment.png" width="16" height="16"/>
+        <image name="control _off.png" width="16" height="16"/>
         <image name="control_eject.png" width="16" height="16"/>
         <image name="database.png" width="16" height="16"/>
         <image name="first" width="16" height="16"/>
         <image name="ipod_cast.png" width="16" height="16"/>
         <image name="lightbulb.png" width="16" height="16"/>
+        <image name="volume_control_icon.png" width="54" height="54"/>
     </resources>
+    <classes>
+        <class className="AlarmTimeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AlarmTimeViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="RemoveAlarm:"/>
+                <relationship kind="action" name="alarmTimeChanged:"/>
+                <relationship kind="action" name="returnToMainPage:"/>
+                <relationship kind="action" name="saveAlarm:"/>
+                <relationship kind="outlet" name="alarmDatePickerOutlet" candidateClass="UIDatePicker"/>
+                <relationship kind="outlet" name="alarmOnOffToggleOutlet" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="removeButtonOutlet" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="AudibleViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AudibleViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="toggleVolumeOnOff:"/>
+                <relationship kind="action" name="volumeChanged:"/>
+                <relationship kind="outlet" name="audibleImageViewOutlet" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="soundPickerOutlet" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="volumeOnOffOutlet" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="volumeOutlet" candidateClass="UISlider"/>
+            </relationships>
+        </class>
+        <class className="MMAlarmMainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MMAlarmMainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addAlarmPressed:"/>
+                <relationship kind="outlet" name="currentTimeOutlet" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MMTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MMTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="returnToMainPage:"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="SnoozeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SnoozeViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="snoozeStepper:"/>
+                <relationship kind="action" name="turnSnoozeOnOff:"/>
+                <relationship kind="outlet" name="snoozeImageViewOutlet" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="snoozeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="snoozeStepper" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="snoozeSwitch" candidateClass="UISwitch"/>
+            </relationships>
+        </class>
+        <class className="VisualVibrateViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VisualVibrateViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="throwFlashlightSwitch:"/>
+                <relationship kind="action" name="throwVibrateSwitch:"/>
+                <relationship kind="outlet" name="flashlightImageViewOutlet" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="flashlightSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="messageTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="vibrateImageViewOutlet" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="vibrateSwitch" candidateClass="UISwitch"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

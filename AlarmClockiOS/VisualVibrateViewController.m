@@ -14,13 +14,14 @@
     __weak IBOutlet UITextField *messageTextField;
     __weak IBOutlet UISwitch *vibrateSwitch;
     __weak IBOutlet UISwitch *flashlightSwitch;
+    __weak IBOutlet UIImageView *vibrateImageViewOutlet;
+    __weak IBOutlet UIImageView *flashlightImageViewOutlet;
     
     MMAlarmMainViewController *avc;
     MMTableViewController *tvc;
 }
 - (IBAction)throwVibrateSwitch:(id)sender;
 - (IBAction)throwFlashlightSwitch:(id)sender;
-
 
 @end
 
@@ -31,13 +32,13 @@
 {
     [super viewDidLoad];
 	
-    if([self.presentingViewController isKindOfClass:[MMTableViewController class]])
+    if([self.presentingViewController isKindOfClass:[MMTableViewController class]])  //edit alarm
     {
         tvc = (MMTableViewController*) self.presentingViewController;
         myAlarm = tvc.editAlarm;
        
     }
-    else
+    else   //new alarm
     {
         avc = (MMAlarmMainViewController*) self.presentingViewController;
         myAlarm = avc.myNewAlarm;
@@ -46,6 +47,20 @@
     vibrateSwitch.on = myAlarm.isSetToVibrate;
     flashlightSwitch.on = myAlarm.isSetToFlash;
     messageTextField.text = myAlarm.alarmMessage;
+    
+    if(vibrateSwitch.on == YES)
+    {
+        vibrateImageViewOutlet.image = [UIImage imageNamed:@"ipod_cast.png"];
+    }
+    else
+        vibrateImageViewOutlet.image = [UIImage imageNamed:@"ipod_cast_off.png"];
+    
+    if(flashlightSwitch.on == YES)
+    {
+        flashlightImageViewOutlet.image = [UIImage imageNamed:@"lightbulb.png"];
+    }
+    else
+        flashlightImageViewOutlet.image = [UIImage imageNamed:@"lightbulb_off.png"];
     
 }
 
@@ -64,9 +79,22 @@
 
 - (IBAction)throwVibrateSwitch:(id)sender {
     myAlarm.isSetToVibrate = vibrateSwitch.isOn;
+    if(vibrateSwitch.on == YES)
+    {
+        vibrateImageViewOutlet.image = [UIImage imageNamed:@"ipod_cast.png"];
+    }
+    else
+        vibrateImageViewOutlet.image = [UIImage imageNamed:@"ipod_cast_off.png"];
 }
 
 - (IBAction)throwFlashlightSwitch:(id)sender {
     myAlarm.isSetToFlash = flashlightSwitch.isOn;
+    if(flashlightSwitch.on == YES)
+    {
+        flashlightImageViewOutlet.image = [UIImage imageNamed:@"lightbulb.png"];
+    }
+    else
+        flashlightImageViewOutlet.image = [UIImage imageNamed:@"lightbulb_off.png"];
+    
 }
 @end

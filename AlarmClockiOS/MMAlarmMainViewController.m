@@ -36,7 +36,7 @@
     
     formatter = [[NSDateFormatter alloc] init];
     [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-    [formatter setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+    [formatter setDateFormat:@"MM/dd/yyyy hh:mm:ss a"];
     //@"MM/dd/yyyy HH:mm:ss a"
     
     isAlarmActive= NO;
@@ -168,19 +168,43 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    [player stop];
+    isAlarmActive = NO;
+ 
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    if([title isEqualToString:@"OK"])
+    if([title isEqualToString:@"OFF"])
     {
-        NSLog(@"OK button was selected.");
+        NSLog(@"OFF button was selected.");
+        [alarms removeLastObject];
     }
     else if([title isEqualToString:@"Snooze"])
     {
         NSLog(@"Snooze button was selected.");
+        MMAlarmDetails *snoozeAlarm = [alarms lastObject];
+        [snoozeAlarm setAlarmDateTime:[[snoozeAlarm alarmDateTime] dateByAddingTimeInterval:[snoozeAlarm snoozeDuration] * 60]];
+        [alarms removeLastObject];
+        [self addSnoozeAlarm:snoozeAlarm];
+       
+    }
+}
+
+-(void) addSnoozeAlarm:(MMAlarmDetails *)alarm
+{
+    int idx;
+    NSComparisonResult result;
+    NSDate *dateFromAlarm = [alarm alarmDateTime];
+   
+    for(idx=0; idx<alarms.count; idx++) {
+        result = [[[alarms objectAtIndex:idx] alarmDateTime] compare:dateFromAlarm];
+        
+        if(result==NSOrderedAscending)
+        {
+            //   NSLog(@"Date1 is in the future");
+            break;
+        }
     }
     
-    [player stop];
-    isAlarmActive = NO;
-    [alarms removeLastObject];
+    [alarms insertObject:alarm atIndex:idx];
 }
 
 - (IBAction)addAlarmPressed:(id)sender

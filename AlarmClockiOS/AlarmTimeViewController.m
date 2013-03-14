@@ -15,6 +15,7 @@
 {
     __weak IBOutlet UIDatePicker *alarmDatePickerOutlet;
     __weak IBOutlet UIButton *alarmOnOffToggleOutlet;
+    __weak IBOutlet UIButton *removeButtonOutlet;
     MMAlarmMainViewController *avc;
     MMTableViewController *tvc;
     BOOL isNewAlarm;
@@ -44,6 +45,7 @@
         myAlarm = tvc.editAlarm;
         alarmNumberToEdit = tvc.alarmNumberToEdit;
         isNewAlarm = NO;
+        removeButtonOutlet.hidden = NO;
     
     }
     else //ADD alarm coming from MMAlarmMainViewController
@@ -52,6 +54,7 @@
         alarms = avc.alarms;
         myAlarm = avc.myNewAlarm;
         isNewAlarm = YES;
+        removeButtonOutlet.hidden = YES;
     }
      NSLog(@"Alarms = %@", alarms);
         
@@ -136,10 +139,15 @@
 }
 
 
-- (IBAction)RemoveAlarm:(id)sender {
+- (IBAction)RemoveAlarm:(id)sender
+{
+    [alarms removeObjectAtIndex:alarmNumberToEdit];
+    [[tvc tableView] reloadData];
+    [self returnToMainPage:sender];
 }
 
 - (IBAction)returnToMainPage:(id)sender {
+    
      [self dismissViewControllerAnimated:YES completion:^ void {}];
 }
 @end
