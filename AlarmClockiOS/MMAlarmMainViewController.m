@@ -95,8 +95,9 @@
      //   NSLog(@"No alarm found or active alarm");
     }
     else
-        if (([[NSDate date] compare:[[alarms objectAtIndex:nextAlarmNum] alarmDateTime]] == NSOrderedDescending) ||
-           ([[NSDate date] compare:[[alarms objectAtIndex:nextAlarmNum] alarmDateTime]] == NSOrderedSame))
+        if (([[[NSDate alloc] init] compare:[[alarms objectAtIndex:nextAlarmNum] alarmDateTime]] == NSOrderedDescending) ||
+            ([[[NSDate alloc] init] compare:[[alarms objectAtIndex:nextAlarmNum] alarmDateTime]] == NSOrderedSame))
+        
     {
         isAlarmActive = YES;
         [self startAlarmSound];
