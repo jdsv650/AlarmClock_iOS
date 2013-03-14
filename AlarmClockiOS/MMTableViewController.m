@@ -13,10 +13,9 @@
 @interface MMTableViewController ()
 {
     MMAlarmMainViewController *avc;
-
+    NSDateFormatter *formatter;
 }
 - (IBAction)returnToMainPage:(id)sender;
-
 
 @end
 
@@ -25,23 +24,14 @@
 @synthesize editAlarm;
 @synthesize alarmNumberToEdit;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    formatter = [[NSDateFormatter alloc] init];
     avc = (MMAlarmMainViewController*) self.presentingViewController;
     alarms = avc.alarms;
     
-	
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,14 +70,11 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
     
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
     [formatter setDateFormat:@"MM/dd/yyyy hh:mm:ss a V"];
-    
-    //alarmNumberToEdit = indexPath.row;
-    //editAlarm = [alarms objectAtIndex:indexPath.row];
-    
+
     cell.textLabel.text = [formatter stringFromDate:[[alarms objectAtIndex:indexPath.row] alarmDateTime]];
+ 
    // cell.textLabel.text = [NSString stringWithFormat:@"%@", [[alarms objectAtIndex:indexPath.row] alarmDateTime]];
     return cell;
 }
@@ -115,13 +102,10 @@
 }
 */
 
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
 }
 
 - (IBAction)returnToMainPage:(id)sender {

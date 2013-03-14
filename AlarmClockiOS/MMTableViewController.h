@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MMAlarmDetails.h"  
+#import "MMAlarmDetails.h"
 
 @interface MMTableViewController : UITableViewController
 

@@ -13,6 +13,7 @@
 
 @interface MMAlarmMainViewController ()
 {
+    __weak IBOutlet UIButton *nextAlarmOutlet;
     __weak IBOutlet UILabel *currentTimeOutlet;
     NSTimer *timerToUpdateCurrentTime;
     AVAudioPlayer *player;
@@ -22,6 +23,7 @@
     NSDateFormatter *formatter;
 }
 - (IBAction)addAlarmPressed:(id)sender;
+- (IBAction)nextAlarmPressed:(id)sender;
 
 
 @end
@@ -29,6 +31,8 @@
 @implementation MMAlarmMainViewController
 @synthesize alarms;
 @synthesize myNewAlarm;
+@synthesize alarmNumberToEdit;
+@synthesize isEdit;
 
 - (void)viewDidLoad
 {
@@ -40,17 +44,19 @@
     //@"MM/dd/yyyy HH:mm:ss a"
     
     isAlarmActive= NO;
+    isEdit = NO;
     
     if(!alarms) {
         alarms = [[NSMutableArray alloc] init];
         nextAlarmNum = -1;
+        nextAlarmOutlet.enabled = NO;
+        alarmNumberToEdit = -1;
     }
-     
+ 
     SEL sel = @selector(updateTime);
     
     gregorian = [[NSCalendar alloc]
                 initWithCalendarIdentifier:NSGregorianCalendar];
-    
     
     timerToUpdateCurrentTime = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:sel userInfo:nil repeats:YES];
 
@@ -59,10 +65,25 @@
 
 - (void)updateTime
 {
-    NSComparisonResult *result;
-    
     //-1 no alarms out of bounds
     nextAlarmNum = alarms.count-1;
+    isEdit = NO;
+    
+    if(alarms.count <= 0) {
+        [nextAlarmOutlet setTitle:@"No Alarms" forState:UIControlStateNormal];
+        alarmNumberToEdit = -1;
+        nextAlarmOutlet.enabled = NO;
+    }
+    else
+    {
+        [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+        [formatter setDateFormat:@"MM/dd/yyyy hh:mm:ss a V"];
+        
+        [nextAlarmOutlet setTitle:[formatter stringFromDate:[[alarms lastObject] alarmDateTime]]
+                         forState:UIControlStateNormal];
+        alarmNumberToEdit = alarms.count-1;
+        nextAlarmOutlet.enabled = YES;
+    }
     
     NSDate *now = [[NSDate alloc] init];
     
@@ -77,12 +98,6 @@
         if (([[NSDate date] compare:[[alarms objectAtIndex:nextAlarmNum] alarmDateTime]] == NSOrderedDescending) ||
            ([[NSDate date] compare:[[alarms objectAtIndex:nextAlarmNum] alarmDateTime]] == NSOrderedSame))
     {
-        
-//        UIStoryboard *storyboard = self.storyboard;
-//         MMAlarmSoundedViewController* sounded = [storyboard instantiateViewControllerWithIdentifier:@"soundedViewController"];
-//        [self presentViewController:sounded animated:NO completion:NULL];
-        //[self performSegueWithIdentifier:@"alarmSoundedSegue" sender:self];
-        
         isAlarmActive = YES;
         [self startAlarmSound];
         
@@ -129,7 +144,7 @@
     
     player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
     player.volume = [[alarms objectAtIndex:nextAlarmNum] alarmVolume];
-    player.numberOfLoops = -1; //Infinite
+    player.numberOfLoops = -1; //keep playing
     [player play];
 }
 
@@ -184,8 +199,8 @@
         [snoozeAlarm setAlarmDateTime:[[snoozeAlarm alarmDateTime] dateByAddingTimeInterval:[snoozeAlarm snoozeDuration] * 60]];
         [alarms removeLastObject];
         [self addSnoozeAlarm:snoozeAlarm];
-       
     }
+
 }
 
 -(void) addSnoozeAlarm:(MMAlarmDetails *)alarm
@@ -218,7 +233,11 @@
     myNewAlarm.alarmMessage =  @"";
     myNewAlarm.isSetToFlash = NO;
     myNewAlarm.isSetToVibrate = NO;
-    
+}
+
+- (IBAction)nextAlarmPressed:(id)sender
+{
+    isEdit = YES;
 }
 
 @end

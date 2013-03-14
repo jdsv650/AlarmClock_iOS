@@ -48,13 +48,23 @@
         removeButtonOutlet.hidden = NO;
     
     }
-    else //ADD alarm coming from MMAlarmMainViewController
+    else //ADD alarm coming from MMAlarmMainViewController -- OR edit next alarm
     {
         avc = (MMAlarmMainViewController*) self.presentingViewController;
         alarms = avc.alarms;
         myAlarm = avc.myNewAlarm;
+    
+        if(avc.isEdit)
+        {
+            alarmNumberToEdit = avc.alarmNumberToEdit;
+            isNewAlarm = NO;
+            removeButtonOutlet.hidden = NO;
+        }
+        else
+        {
         isNewAlarm = YES;
         removeButtonOutlet.hidden = YES;
+        }
     }
      NSLog(@"Alarms = %@", alarms);
         
@@ -90,13 +100,17 @@
          [alarms removeObjectAtIndex:alarmNumberToEdit];
     }
     
-    
-    if([dateFromPicker compare:now] == NSOrderedAscending)  //dateFromPicker already past alarm for tomorrow
+    if([dateFromPicker compare:[now dateByAddingTimeInterval:60*60*24]] == NSOrderedDescending)
+    {
+        //beyond 24hours on edit so roll back a day
+        dateFromPicker = [dateFromPicker dateByAddingTimeInterval:(-60*60*24)];
+    }
+    else
+        if([dateFromPicker compare:now] == NSOrderedAscending)  //dateFromPicker already missed alarm
     {
         NSLog(@"SUCK IT!!!");
         dateFromPicker = [dateFromPicker dateByAddingTimeInterval:(60*60*24)];
     }
-    
     
     for(idx=0; idx<alarms.count; idx++) {
         result = [[[alarms objectAtIndex:idx] alarmDateTime] compare:dateFromPicker];

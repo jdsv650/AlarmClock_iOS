@@ -139,7 +139,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="532" y="-345"/>
+            <point key="canvasLocation" x="484" y="-297"/>
         </scene>
         <!--Audible View Controller - Second-->
         <scene sceneID="13">
@@ -228,7 +228,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="12" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653" y="498"/>
+            <point key="canvasLocation" x="901" y="118"/>
         </scene>
         <!--Visual Vibrate View Controller - Visual-Vibrate-->
         <scene sceneID="FfF-Tv-VAQ">
@@ -335,7 +335,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t3S-fI-Ail" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="121" y="852"/>
+            <point key="canvasLocation" x="143" y="856"/>
         </scene>
         <!--Snooze View Controller - Snooze-->
         <scene sceneID="RWO-He-T46">
@@ -412,7 +412,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qrY-bu-lhA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="627" y="1173"/>
+            <point key="canvasLocation" x="549" y="541"/>
         </scene>
         <!--Alarm Main View Controller-->
         <scene sceneID="EJa-g0-8cR">
@@ -458,25 +458,52 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <segue destination="BFi-nQ-u4g" kind="modal" id="LHd-b6-zQ2"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTC-5l-ele">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="No Alarms">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="nextAlarmPressed:" destination="oIP-Jy-yAg" eventType="touchUpInside" id="sDK-DU-Sik"/>
+                                    <segue destination="4" kind="modal" id="C2P-mq-p8X"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Next Alarm At:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfo-mO-SYp">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="lkW-3I-BSY" firstAttribute="centerX" secondItem="MHC-Kf-Jlt" secondAttribute="centerX" type="default" id="OIP-VJ-A4T"/>
+                            <constraint firstAttribute="trailing" secondItem="wfo-mO-SYp" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="0TG-yx-lZ5"/>
+                            <constraint firstItem="wfo-mO-SYp" firstAttribute="leading" secondItem="MHC-Kf-Jlt" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="9Nt-AT-6zs"/>
+                            <constraint firstItem="O2V-Ut-gVC" firstAttribute="leading" secondItem="MHC-Kf-Jlt" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="GhP-VO-ecf"/>
+                            <constraint firstItem="zTC-5l-ele" firstAttribute="leading" secondItem="MHC-Kf-Jlt" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="R0b-R3-lkk"/>
+                            <constraint firstItem="wfo-mO-SYp" firstAttribute="top" secondItem="MHC-Kf-Jlt" secondAttribute="top" constant="223" id="Uk6-UG-sIw"/>
                             <constraint firstItem="5P9-KP-xgF" firstAttribute="top" secondItem="MHC-Kf-Jlt" secondAttribute="top" constant="20" symbolic="YES" type="default" id="Uqc-xQ-XeD"/>
                             <constraint firstItem="5P9-KP-xgF" firstAttribute="leading" secondItem="MHC-Kf-Jlt" secondAttribute="leading" constant="26" id="aCT-Ed-KbJ"/>
-                            <constraint firstItem="O2V-Ut-gVC" firstAttribute="leading" secondItem="lkW-3I-BSY" secondAttribute="leading" type="default" id="aEm-iQ-SjL"/>
+                            <constraint firstItem="lkW-3I-BSY" firstAttribute="leading" secondItem="MHC-Kf-Jlt" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="aXo-go-Far"/>
                             <constraint firstItem="O2V-Ut-gVC" firstAttribute="top" secondItem="MHC-Kf-Jlt" secondAttribute="top" constant="161" id="deB-an-YE9"/>
                             <constraint firstItem="O2V-Ut-gVC" firstAttribute="trailing" secondItem="lkW-3I-BSY" secondAttribute="trailing" type="default" id="nNY-Oc-REg"/>
+                            <constraint firstItem="wfo-mO-SYp" firstAttribute="centerX" secondItem="O2V-Ut-gVC" secondAttribute="centerX" type="default" id="noP-gi-3Tv"/>
+                            <constraint firstItem="zTC-5l-ele" firstAttribute="top" secondItem="wfo-mO-SYp" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="uKG-pQ-Wy2"/>
                             <constraint firstItem="lkW-3I-BSY" firstAttribute="top" secondItem="MHC-Kf-Jlt" secondAttribute="top" constant="97" id="uaO-X4-VFn"/>
+                            <constraint firstAttribute="trailing" secondItem="zTC-5l-ele" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="xSH-q8-ETD"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="currentTimeOutlet" destination="5P9-KP-xgF" id="Ogu-Dz-RvM"/>
+                        <outlet property="nextAlarmOutlet" destination="zTC-5l-ele" id="6EF-UA-iA6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zdp-H7-19n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-333" y="129"/>
+            <point key="canvasLocation" x="-578" y="170"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="ief-K8-jQk">
@@ -523,7 +550,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mjf-18-ob7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-210" y="-426"/>
+            <point key="canvasLocation" x="-280" y="-532"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="15">
@@ -545,7 +572,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="129"/>
+            <point key="canvasLocation" x="23" y="154"/>
         </scene>
     </scenes>
     <resources>
@@ -591,7 +618,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MMAlarmMainViewController.h"/>
             <relationships>
                 <relationship kind="action" name="addAlarmPressed:"/>
+                <relationship kind="action" name="nextAlarmPressed:"/>
                 <relationship kind="outlet" name="currentTimeOutlet" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="nextAlarmOutlet" candidateClass="UIButton"/>
             </relationships>
         </class>
         <class className="MMTableViewController" superclassName="UITableViewController">

@@ -13,5 +13,7 @@
 
 @property NSMutableArray *alarms;
 @property MMAlarmDetails *myNewAlarm;
+@property int alarmNumberToEdit;
+@property BOOL isEdit;
 
 @end
