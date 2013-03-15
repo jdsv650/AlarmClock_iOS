@@ -81,23 +81,14 @@
     NSDate *dateFromPicker = [alarmDatePickerOutlet date];
     NSDate *now = [[NSDate alloc] init];
     
-//    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    
-//    NSDateComponents *dateFromPickerComponents = [gregorian components:(NSSecondCalendarUnit  | NSMinuteCalendarUnit | NSHourCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit) fromDate:dateFromPicker];
-    
-//    NSInteger pickerHour = [dateFromPickerComponents hour];
-//    NSInteger pickerMin =  [dateFromPickerComponents minute];
-//    NSInteger pickerSec =  [dateFromPickerComponents second];
-//    
-//    NSDateComponents *nowComponents = [gregorian components:(NSSecondCalendarUnit  | NSMinuteCalendarUnit | NSHourCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit) fromDate:now];
-//    
-//    NSInteger nowHour = [dateFromPickerComponents hour];
-//    NSInteger nowMin =  [dateFromPickerComponents minute];
-//    NSInteger nowSec =  [dateFromPickerComponents second];
-    
     if(!isNewAlarm)
     {
-         [alarms removeObjectAtIndex:alarmNumberToEdit];
+        // protect against the case when we are editing an alarm that goes off and is removed when
+        // we dismiss the popup -- then just save the alarm no remove
+        if(alarmNumberToEdit < alarms.count)
+        {
+            [alarms removeObjectAtIndex:alarmNumberToEdit];
+        }
     }
     
     if([dateFromPicker compare:[now dateByAddingTimeInterval:60*60*24]] == NSOrderedDescending)

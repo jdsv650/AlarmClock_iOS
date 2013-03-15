@@ -8,6 +8,7 @@
 
 #import "AlarmTimeViewController.h"
 #import "MMAlarmMainViewController.h"
+#import "MMTableViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -19,8 +20,8 @@
     AVAudioPlayer *player;
     int nextAlarmNum;
     BOOL isAlarmActive;
-    NSCalendar *gregorian;
     NSDateFormatter *formatter;
+    MMTableViewController *tvc;
 }
 - (IBAction)addAlarmPressed:(id)sender;
 - (IBAction)nextAlarmPressed:(id)sender;
@@ -55,13 +56,8 @@
  
     SEL sel = @selector(updateTime);
     
-    gregorian = [[NSCalendar alloc]
-                initWithCalendarIdentifier:NSGregorianCalendar];
-    
     timerToUpdateCurrentTime = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:sel userInfo:nil repeats:YES];
-
 }
-
 
 - (void)updateTime
 {
@@ -175,12 +171,13 @@
 }
 
 
-//- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    AlarmTimeViewController *atvc = [segue destinationViewController];
-//    atvc.alarms = alarms;
-//    
-//}
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([[segue identifier] isEqualToString:@"tableViewSegue"])
+    {
+        tvc = [segue destinationViewController];
+    }
+}
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -191,15 +188,22 @@
     if([title isEqualToString:@"OFF"])
     {
         NSLog(@"OFF button was selected.");
-        [alarms removeLastObject];
+        if(alarms.count > 0)
+            [alarms removeLastObject];
     }
     else if([title isEqualToString:@"Snooze"])
     {
         NSLog(@"Snooze button was selected.");
         MMAlarmDetails *snoozeAlarm = [alarms lastObject];
         [snoozeAlarm setAlarmDateTime:[[snoozeAlarm alarmDateTime] dateByAddingTimeInterval:[snoozeAlarm snoozeDuration] * 60]];
-        [alarms removeLastObject];
+        if(alarms.count > 0)
+            [alarms removeLastObject];
         [self addSnoozeAlarm:snoozeAlarm];
+    }
+    
+    if(tvc != nil)
+    {
+        [[tvc tableView] reloadData];
     }
 
 }
