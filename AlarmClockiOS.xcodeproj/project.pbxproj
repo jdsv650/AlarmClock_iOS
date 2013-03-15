@@ -68,6 +68,10 @@
 		1A99704916E9AFFB009F6C6B /* MMTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A99704816E9AFFB009F6C6B /* MMTableViewController.m */; };
 		1A99704F16EA6E13009F6C6B /* MMAlarmDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A99704E16EA6E13009F6C6B /* MMAlarmDetails.m */; };
 		1A99705516EE98BD009F6C6B /* VisualVibrateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A99705416EE98BD009F6C6B /* VisualVibrateViewController.m */; };
+		1A9970C616F29D44009F6C6B /* alarm_clk_standard.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A9970C516F29D43009F6C6B /* alarm_clk_standard.png */; };
+		1A9970C816F29D4F009F6C6B /* alarm_clk_retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A9970C716F29D4E009F6C6B /* alarm_clk_retina.png */; };
+		1A9970CA16F29D7A009F6C6B /* alarm_clk_standard.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A9970C916F29D7A009F6C6B /* alarm_clk_standard.png */; };
+		1A9970CC16F29DA1009F6C6B /* alarm_clk_retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A9970CB16F29DA0009F6C6B /* alarm_clk_retina.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -143,6 +147,10 @@
 		1A99704E16EA6E13009F6C6B /* MMAlarmDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMAlarmDetails.m; sourceTree = "<group>"; };
 		1A99705316EE98BD009F6C6B /* VisualVibrateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisualVibrateViewController.h; sourceTree = "<group>"; };
 		1A99705416EE98BD009F6C6B /* VisualVibrateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisualVibrateViewController.m; sourceTree = "<group>"; };
+		1A9970C516F29D43009F6C6B /* alarm_clk_standard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alarm_clk_standard.png; sourceTree = "<group>"; };
+		1A9970C716F29D4E009F6C6B /* alarm_clk_retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alarm_clk_retina.png; sourceTree = "<group>"; };
+		1A9970C916F29D7A009F6C6B /* alarm_clk_standard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alarm_clk_standard.png; sourceTree = "<group>"; };
+		1A9970CB16F29DA0009F6C6B /* alarm_clk_retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alarm_clk_retina.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +172,8 @@
 		1A01D85716E9764700E855C5 = {
 			isa = PBXGroup;
 			children = (
+				1A9970CB16F29DA0009F6C6B /* alarm_clk_retina.png */,
+				1A9970C916F29D7A009F6C6B /* alarm_clk_standard.png */,
 				1A01D86916E9764700E855C5 /* AlarmClockiOS */,
 				1A01D86216E9764700E855C5 /* Frameworks */,
 				1A01D86116E9764700E855C5 /* Products */,
@@ -218,6 +228,8 @@
 		1A01D86A16E9764700E855C5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1A9970C716F29D4E009F6C6B /* alarm_clk_retina.png */,
+				1A9970C516F29D43009F6C6B /* alarm_clk_standard.png */,
 				1A01D88A16E9764700E855C5 /* second@2x.png */,
 				1A01D88816E9764700E855C5 /* second.png */,
 				1A01D88316E9764700E855C5 /* first@2x.png */,
@@ -386,6 +398,10 @@
 				1A01D8E116E981A500E855C5 /* Evacuate.mp3 in Resources */,
 				1A01D8E216E981A500E855C5 /* Rooster.mp3 in Resources */,
 				1A01D8E316E981A500E855C5 /* Tornado_Siren.mp3 in Resources */,
+				1A9970C616F29D44009F6C6B /* alarm_clk_standard.png in Resources */,
+				1A9970C816F29D4F009F6C6B /* alarm_clk_retina.png in Resources */,
+				1A9970CA16F29D7A009F6C6B /* alarm_clk_standard.png in Resources */,
+				1A9970CC16F29DA1009F6C6B /* alarm_clk_retina.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,7 +508,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AlarmClockiOS/AlarmClockiOS-Prefix.pch";
 				INFOPLIST_FILE = "AlarmClockiOS/AlarmClockiOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -503,7 +521,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AlarmClockiOS/AlarmClockiOS-Prefix.pch";
 				INFOPLIST_FILE = "AlarmClockiOS/AlarmClockiOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
