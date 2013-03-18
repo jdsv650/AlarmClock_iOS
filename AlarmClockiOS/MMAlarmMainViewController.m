@@ -41,13 +41,19 @@
 {
     [super viewDidLoad];
     
+    
+    // for background
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [[AVAudioSession sharedInstance] setActive: YES error: nil];
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+
     device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
     formatter = [[NSDateFormatter alloc] init];
     [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-    [formatter setDateFormat:@"MM/dd/yyyy hh:mm:ss a"];
+    [formatter setDateFormat:@"MM/dd/yyyy hh:mm:ss a V"];
     //@"MM/dd/yyyy HH:mm:ss a"
-    
+       
     isAlarmActive= NO;
     isEdit = NO;
     
@@ -76,11 +82,9 @@
     }
     else
     {
-        [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-        [formatter setDateFormat:@"MM/dd/yyyy hh:mm:ss a V"];
-        
         [nextAlarmOutlet setTitle:[formatter stringFromDate:[[alarms lastObject] alarmDateTime]]
                          forState:UIControlStateNormal];
+        
         alarmNumberToEdit = alarms.count-1;
         nextAlarmOutlet.enabled = YES;
     }
@@ -126,7 +130,7 @@
 {
     if(device.hasTorch == NO)
     {
-        NSLog(@"NO Torch -- so Suck IT!!!");
+        NSLog(@"Device has no torch");
         return;
     }
     
@@ -299,4 +303,7 @@
     isEdit = YES;
 }
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+}
 @end

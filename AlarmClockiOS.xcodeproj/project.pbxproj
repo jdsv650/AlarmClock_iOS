@@ -62,6 +62,9 @@
 		1A01D8E116E981A500E855C5 /* Evacuate.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1A01D8DC16E981A500E855C5 /* Evacuate.mp3 */; };
 		1A01D8E216E981A500E855C5 /* Rooster.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1A01D8DD16E981A500E855C5 /* Rooster.mp3 */; };
 		1A01D8E316E981A500E855C5 /* Tornado_Siren.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1A01D8DE16E981A500E855C5 /* Tornado_Siren.mp3 */; };
+		1A6FEF0116F4C77B00F5B8A0 /* AlarmClockiOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1A6FEEFF16F4C77B00F5B8A0 /* AlarmClockiOS.xcdatamodeld */; };
+		1A6FEF0516F4C98200F5B8A0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A6FEF0416F4C98200F5B8A0 /* CoreData.framework */; };
+		1A6FEF1016F6A75000F5B8A0 /* silence_10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1A6FEF0F16F6A75000F5B8A0 /* silence_10.mp3 */; };
 		1A99704116E9875D009F6C6B /* MMAlarmMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A99703F16E9875D009F6C6B /* MMAlarmMainViewController.m */; };
 		1A99704416E98DC0009F6C6B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A99704316E98DC0009F6C6B /* AVFoundation.framework */; };
 		1A99704616E98DCE009F6C6B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A99704516E98DCE009F6C6B /* AudioToolbox.framework */; };
@@ -137,6 +140,9 @@
 		1A01D8DC16E981A500E855C5 /* Evacuate.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Evacuate.mp3; sourceTree = "<group>"; };
 		1A01D8DD16E981A500E855C5 /* Rooster.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Rooster.mp3; sourceTree = "<group>"; };
 		1A01D8DE16E981A500E855C5 /* Tornado_Siren.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tornado_Siren.mp3; sourceTree = "<group>"; };
+		1A6FEF0016F4C77B00F5B8A0 /* AlarmClockiOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AlarmClockiOS.xcdatamodel; sourceTree = "<group>"; };
+		1A6FEF0416F4C98200F5B8A0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		1A6FEF0F16F6A75000F5B8A0 /* silence_10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = silence_10.mp3; sourceTree = "<group>"; };
 		1A99703E16E9875D009F6C6B /* MMAlarmMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMAlarmMainViewController.h; sourceTree = "<group>"; };
 		1A99703F16E9875D009F6C6B /* MMAlarmMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMAlarmMainViewController.m; sourceTree = "<group>"; };
 		1A99704316E98DC0009F6C6B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -158,6 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A6FEF0516F4C98200F5B8A0 /* CoreData.framework in Frameworks */,
 				1A99704616E98DCE009F6C6B /* AudioToolbox.framework in Frameworks */,
 				1A99704416E98DC0009F6C6B /* AVFoundation.framework in Frameworks */,
 				1A01D86416E9764700E855C5 /* UIKit.framework in Frameworks */,
@@ -191,6 +198,7 @@
 		1A01D86216E9764700E855C5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1A6FEF0416F4C98200F5B8A0 /* CoreData.framework */,
 				1A99704516E98DCE009F6C6B /* AudioToolbox.framework */,
 				1A99704316E98DC0009F6C6B /* AVFoundation.framework */,
 				1A01D86316E9764700E855C5 /* UIKit.framework */,
@@ -220,6 +228,7 @@
 				1A01D88616E9764700E855C5 /* AudibleViewController.m */,
 				1A99705316EE98BD009F6C6B /* VisualVibrateViewController.h */,
 				1A99705416EE98BD009F6C6B /* VisualVibrateViewController.m */,
+				1A6FEEFF16F4C77B00F5B8A0 /* AlarmClockiOS.xcdatamodeld */,
 				1A01D86A16E9764700E855C5 /* Supporting Files */,
 			);
 			path = AlarmClockiOS;
@@ -290,6 +299,7 @@
 		1A01D8D916E981A500E855C5 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				1A6FEF0F16F6A75000F5B8A0 /* silence_10.mp3 */,
 				1A01D8DA16E981A500E855C5 /* Alarm_Clock.mp3 */,
 				1A01D8DB16E981A500E855C5 /* Car_Alarm.mp3 */,
 				1A01D8DC16E981A500E855C5 /* Evacuate.mp3 */,
@@ -402,6 +412,7 @@
 				1A9970C816F29D4F009F6C6B /* alarm_clk_retina.png in Resources */,
 				1A9970CA16F29D7A009F6C6B /* alarm_clk_standard.png in Resources */,
 				1A9970CC16F29DA1009F6C6B /* alarm_clk_retina.png in Resources */,
+				1A6FEF1016F6A75000F5B8A0 /* silence_10.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +432,7 @@
 				1A99704916E9AFFB009F6C6B /* MMTableViewController.m in Sources */,
 				1A99704F16EA6E13009F6C6B /* MMAlarmDetails.m in Sources */,
 				1A99705516EE98BD009F6C6B /* VisualVibrateViewController.m in Sources */,
+				1A6FEF0116F4C77B00F5B8A0 /* AlarmClockiOS.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,7 +520,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AlarmClockiOS/AlarmClockiOS-Prefix.pch";
 				INFOPLIST_FILE = "AlarmClockiOS/AlarmClockiOS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -521,7 +533,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AlarmClockiOS/AlarmClockiOS-Prefix.pch";
 				INFOPLIST_FILE = "AlarmClockiOS/AlarmClockiOS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -550,6 +562,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1A6FEEFF16F4C77B00F5B8A0 /* AlarmClockiOS.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1A6FEF0016F4C77B00F5B8A0 /* AlarmClockiOS.xcdatamodel */,
+			);
+			currentVersion = 1A6FEF0016F4C77B00F5B8A0 /* AlarmClockiOS.xcdatamodel */;
+			path = AlarmClockiOS.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1A01D85816E9764700E855C5 /* Project object */;
 }

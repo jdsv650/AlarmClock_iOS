@@ -10,14 +10,21 @@
 
 @implementation MMAlarmDetails
 
+//@dynamic alarmDateTime;  //date
+//@dynamic alarmSound;     //string
+//@dynamic alarmMessage;   //string
+//@dynamic alarmVolume;    //float
+//@dynamic snoozeDuration; //int
+//@dynamic isSnoozeEnabled;//bool
+//@dynamic isSetToVibrate; //bool
+//@dynamic isSetToFlash;   //bool
+
 @synthesize alarmDateTime;  //date
 @synthesize alarmSound;     //string
-@synthesize alarmMessage; //string
+@synthesize alarmMessage;   //string
 @synthesize alarmVolume;    //float
-@synthesize snoozeDuration;  //int
-
-
-@synthesize isSnoozeEnabled;
+@synthesize snoozeDuration; //int
+@synthesize isSnoozeEnabled;//bool
 @synthesize isSetToVibrate; //bool
 @synthesize isSetToFlash;   //bool
 

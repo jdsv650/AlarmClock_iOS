@@ -7,16 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 @interface MMAlarmDetails : NSObject
 
 @property NSDate *alarmDateTime;
 @property NSString *alarmSound;
 @property NSString *alarmMessage;
-
 @property float alarmVolume;
 @property int snoozeDuration;
-
 @property BOOL isSnoozeEnabled;
 @property BOOL isSetToVibrate;
 @property BOOL isSetToFlash;

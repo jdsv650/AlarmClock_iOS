@@ -62,12 +62,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    NSString *CellIdentifier = @"CustomID";
+   
+   // iOS 6 
+   // UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    //iOS 5
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if(cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CustomID"];
     }
     
     [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
