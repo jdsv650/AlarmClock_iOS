@@ -70,7 +70,6 @@
         
     [alarmDatePickerOutlet setDatePickerMode:UIDatePickerModeTime];
     alarmDatePickerOutlet.date = myAlarm.alarmDateTime;
-	
 }
 
 
@@ -99,7 +98,6 @@
     else
         if([dateFromPicker compare:now] == NSOrderedAscending)  //dateFromPicker already missed alarm
     {
-        NSLog(@"SUCK IT!!!");
         dateFromPicker = [dateFromPicker dateByAddingTimeInterval:(60*60*24)];
     }
     

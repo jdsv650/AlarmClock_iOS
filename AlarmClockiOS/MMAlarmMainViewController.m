@@ -32,6 +32,8 @@
 @end
 
 @implementation MMAlarmMainViewController
+
+@synthesize managedObjectContext;
 @synthesize alarms;
 @synthesize myNewAlarm;
 @synthesize alarmNumberToEdit;
@@ -57,16 +59,24 @@
     isAlarmActive= NO;
     isEdit = NO;
     
-    if(!alarms) {
-        alarms = [[NSMutableArray alloc] init];
-        nextAlarmNum = -1;
+  //  if(!alarms) {
+//  moved  to app delegate      alarms = [[NSMutableArray alloc] init];
+       nextAlarmNum = -1;
         nextAlarmOutlet.enabled = NO;
         alarmNumberToEdit = -1;
-    }
+  //  }
  
     SEL sel = @selector(updateTime);
     
     timerToUpdateCurrentTime = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:sel userInfo:nil repeats:YES];
+}
+
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    isAlarmActive= NO;
+    
+    
 }
 
 - (void)updateTime
@@ -89,7 +99,7 @@
         nextAlarmOutlet.enabled = YES;
     }
     
-    NSDate *now = [[NSDate alloc] init];
+    NSDate *now = [NSDate date];
     
     currentTimeOutlet.text = [formatter stringFromDate:now];
     
@@ -99,8 +109,8 @@
      //   NSLog(@"No alarm found or active alarm");
     }
     else
-        if (([[[NSDate alloc] init] compare:[[alarms objectAtIndex:nextAlarmNum] alarmDateTime]] == NSOrderedDescending) ||
-            ([[[NSDate alloc] init] compare:[[alarms objectAtIndex:nextAlarmNum] alarmDateTime]] == NSOrderedSame))
+        if (([now compare:[[alarms objectAtIndex:nextAlarmNum] alarmDateTime]] == NSOrderedDescending) ||
+            ([now compare:[[alarms objectAtIndex:nextAlarmNum] alarmDateTime]] == NSOrderedSame))
         
     {
         isAlarmActive = YES;

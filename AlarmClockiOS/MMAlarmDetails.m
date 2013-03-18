@@ -10,6 +10,7 @@
 
 @implementation MMAlarmDetails
 
+//stick with the alarm array at runtime
 //@dynamic alarmDateTime;  //date
 //@dynamic alarmSound;     //string
 //@dynamic alarmMessage;   //string
@@ -27,5 +28,6 @@
 @synthesize isSnoozeEnabled;//bool
 @synthesize isSetToVibrate; //bool
 @synthesize isSetToFlash;   //bool
+
 
 @end
