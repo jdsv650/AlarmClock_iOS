@@ -36,13 +36,20 @@
         alarms = [[NSMutableArray alloc] init];
     }
     
-   // do later
-    //[self fetchAlarms];
-        
     // for background
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     [[AVAudioSession sharedInstance] setActive: YES error: nil];
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    
+    // without this block first alarm run from back fails
+    NSString *soundFileString = [NSString stringWithFormat:@"%@/silence_10.mp3", [[NSBundle mainBundle] resourcePath]];
+    NSURL *soundFileURL = [NSURL URLWithString:soundFileString];
+    player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+    player.volume = 0.2;
+    player.numberOfLoops = -1; //keep playing
+    [player play];
+    if([player isPlaying])
+        [player stop];
     
 //    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
 //    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:60];
@@ -51,9 +58,6 @@
 //    localNotification.alertAction = @"Action String";
 //    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 
-    if([player isPlaying])
-        [player stop];
-    
     return YES;
 }
 
@@ -147,19 +151,15 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
-    //save data
-    
-    NSLog(@"applicationDidEnterBackground");
-    
-    [self saveAlarms];
-    
     NSString *soundFileString = [NSString stringWithFormat:@"%@/silence_10.mp3", [[NSBundle mainBundle] resourcePath]];
     NSURL *soundFileURL = [NSURL URLWithString:soundFileString];
     player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
-    player.volume = 0.5;
+    player.volume = 0.2;
     player.numberOfLoops = -1; //keep playing
     [player play];
     
+    //save data
+    [self saveAlarms];
 }
 
 - (void)saveAlarms
@@ -167,7 +167,7 @@
     for(int i=0; i < alarms.count; i++)
     {
         NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:@"AlarmDetails"
-                                                                          inManagedObjectContext:[self managedObjectContext]];
+                     inManagedObjectContext:[self managedObjectContext]];
         
         //[newManagedObject ];
         [newManagedObject setValue:[[alarms objectAtIndex:i] alarmDateTime] forKey:@"alarmDateTime"];
@@ -179,7 +179,7 @@
         [newManagedObject setValue:[NSNumber numberWithBool:[[alarms objectAtIndex:i] isSetToVibrate]] forKey:@"isSetToVibrate"];
         [newManagedObject setValue:[NSNumber numberWithBool:[[alarms objectAtIndex:i] isSetToFlash]] forKey:@"isSetToFlash"];
         
-         [self saveContext];
+        [self saveContext];
     }
 }
 

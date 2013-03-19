@@ -72,13 +72,12 @@
     alarmDatePickerOutlet.date = myAlarm.alarmDateTime;
 }
 
-
 - (IBAction)saveAlarm:(id)sender {
     int idx;
     NSComparisonResult result;
     
     NSDate *dateFromPicker = [alarmDatePickerOutlet date];
-    NSDate *now = [[NSDate alloc] init];
+   // NSDate *now = [[NSDate alloc] init];
     
     if(!isNewAlarm)
     {
@@ -90,13 +89,13 @@
         }
     }
     
-    if([dateFromPicker compare:[now dateByAddingTimeInterval:60*60*24]] == NSOrderedDescending)
+    if([dateFromPicker compare:[[[NSDate alloc] init] dateByAddingTimeInterval:60*60*24]] == NSOrderedDescending)
     {
         //beyond 24hours on edit so roll back a day
         dateFromPicker = [dateFromPicker dateByAddingTimeInterval:(-60*60*24)];
     }
     else
-        if([dateFromPicker compare:now] == NSOrderedAscending)  //dateFromPicker already missed alarm
+        if([dateFromPicker compare:[[NSDate alloc] init]] == NSOrderedAscending)  //dateFromPicker already missed alarm
     {
         dateFromPicker = [dateFromPicker dateByAddingTimeInterval:(60*60*24)];
     }

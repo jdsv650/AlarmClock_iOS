@@ -28,7 +28,6 @@
 - (IBAction)addAlarmPressed:(id)sender;
 - (IBAction)nextAlarmPressed:(id)sender;
 
-
 @end
 
 @implementation MMAlarmMainViewController
@@ -42,7 +41,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     
     // for background
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
@@ -59,12 +57,11 @@
     isAlarmActive= NO;
     isEdit = NO;
     
-  //  if(!alarms) {
-//  moved  to app delegate      alarms = [[NSMutableArray alloc] init];
+    if(!alarms) {
        nextAlarmNum = -1;
-        nextAlarmOutlet.enabled = NO;
-        alarmNumberToEdit = -1;
-  //  }
+       nextAlarmOutlet.enabled = NO;
+       alarmNumberToEdit = -1;
+    }
  
     SEL sel = @selector(updateTime);
     
@@ -74,19 +71,18 @@
 
 - (void) viewDidAppear:(BOOL)animated
 {
-    isAlarmActive= NO;
-    
+   // isAlarmActive= NO;
+    //-1 no alarms out of bounds
+   // nextAlarmNum = alarms.count-1;
+   // isEdit = NO;
     
 }
 
 - (void)updateTime
 {
-    //-1 no alarms out of bounds
-    nextAlarmNum = alarms.count-1;
-    isEdit = NO;
-    
     if(alarms.count <= 0) {
         [nextAlarmOutlet setTitle:@"No Alarms" forState:UIControlStateNormal];
+        NSLog(@"NO ALARMS FOUND");
         alarmNumberToEdit = -1;
         nextAlarmOutlet.enabled = NO;
     }
@@ -95,22 +91,26 @@
         [nextAlarmOutlet setTitle:[formatter stringFromDate:[[alarms lastObject] alarmDateTime]]
                          forState:UIControlStateNormal];
         
-        alarmNumberToEdit = alarms.count-1;
+       // alarmNumberToEdit = alarms.count-1;
         nextAlarmOutlet.enabled = YES;
     }
     
-    NSDate *now = [NSDate date];
+    NSDate *now = [[NSDate alloc] init];
     
     currentTimeOutlet.text = [formatter stringFromDate:now];
     
+    //MAKE sure next alarm is set ***** or will do nothing here
+    nextAlarmNum = alarms.count-1;
+    
     if(nextAlarmNum < 0 || isAlarmActive)
     {
+       // NSLog(@"DO NOTHING");
         //do nothing
      //   NSLog(@"No alarm found or active alarm");
     }
     else
-        if (([now compare:[[alarms objectAtIndex:nextAlarmNum] alarmDateTime]] == NSOrderedDescending) ||
-            ([now compare:[[alarms objectAtIndex:nextAlarmNum] alarmDateTime]] == NSOrderedSame))
+        if (([[[NSDate alloc] init] compare:[[alarms objectAtIndex:nextAlarmNum] alarmDateTime]] == NSOrderedDescending) ||
+            ([[[NSDate alloc] init] compare:[[alarms objectAtIndex:nextAlarmNum] alarmDateTime]] == NSOrderedSame))
         
     {
         isAlarmActive = YES;
@@ -297,6 +297,7 @@
 
 - (IBAction)addAlarmPressed:(id)sender
 {
+    isEdit = NO;
     myNewAlarm = [[MMAlarmDetails alloc] init];
     myNewAlarm.alarmDateTime = [[NSDate alloc] init];
     myNewAlarm.alarmSound = @"Alarm Clock";
@@ -311,6 +312,20 @@
 - (IBAction)nextAlarmPressed:(id)sender
 {
     isEdit = YES;
+    alarmNumberToEdit = alarms.count-1;
+    
+    if(alarmNumberToEdit >= 0)
+    {
+    myNewAlarm = [[MMAlarmDetails alloc] init];
+    myNewAlarm.alarmDateTime = [[alarms objectAtIndex:alarms.count-1] alarmDateTime];
+    myNewAlarm.alarmSound = [[alarms objectAtIndex:alarms.count-1] alarmSound];
+    myNewAlarm.alarmVolume = [[alarms objectAtIndex:alarms.count-1] alarmVolume];
+    myNewAlarm.isSnoozeEnabled = [[alarms objectAtIndex:alarms.count-1] isSnoozeEnabled];
+    myNewAlarm.snoozeDuration = [[alarms objectAtIndex:alarms.count-1] snoozeDuration];
+    myNewAlarm.alarmMessage =  [[alarms objectAtIndex:alarms.count-1] alarmMessage];
+    myNewAlarm.isSetToFlash = [[alarms objectAtIndex:alarms.count-1] isSetToFlash];
+    myNewAlarm.isSetToVibrate = [[alarms objectAtIndex:alarms.count-1] isSetToVibrate];
+    }
 }
 
 - (void)viewDidUnload {
