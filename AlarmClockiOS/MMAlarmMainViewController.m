@@ -18,22 +18,19 @@
     __weak IBOutlet UILabel *currentTimeOutlet;
     NSTimer *timerToUpdateCurrentTime;
     AVAudioPlayer *player;
-    AVCaptureDevice *device;
-    AVCaptureSession *AVSession;
     int nextAlarmNum;
     BOOL isAlarmActive;
+    BOOL isTorchOn;
     NSDateFormatter *formatter;
     MMTableViewController *tvc;
 }
 - (IBAction)addAlarmPressed:(id)sender;
 - (IBAction)nextAlarmPressed:(id)sender;
 
-
 @end
 
 @implementation MMAlarmMainViewController
 
-@synthesize managedObjectContext;
 @synthesize alarms;
 @synthesize myNewAlarm;
 @synthesize alarmNumberToEdit;
@@ -43,13 +40,12 @@
 {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becameActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     
     // for background
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     [[AVAudioSession sharedInstance] setActive: YES error: nil];
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-
-    device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
     formatter = [[NSDateFormatter alloc] init];
     [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
@@ -57,26 +53,21 @@
     //@"MM/dd/yyyy HH:mm:ss a"
        
     isAlarmActive= NO;
+    isTorchOn = NO;
     isEdit = NO;
     
-  //  if(!alarms) {
-//  moved  to app delegate      alarms = [[NSMutableArray alloc] init];
-       nextAlarmNum = -1;
-        nextAlarmOutlet.enabled = NO;
-        alarmNumberToEdit = -1;
-  //  }
+    nextAlarmNum = -1;
+    nextAlarmOutlet.enabled = NO;
+    alarmNumberToEdit = -1;
  
     SEL sel = @selector(updateTime);
-    
     timerToUpdateCurrentTime = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:sel userInfo:nil repeats:YES];
 }
 
 
 - (void) viewDidAppear:(BOOL)animated
 {
-    isAlarmActive= NO;
-    
-    
+  //  isAlarmActive= NO;
 }
 
 - (void)updateTime
@@ -114,6 +105,8 @@
         
     {
         isAlarmActive = YES;
+        
+        [self popUpForDismissAlarm];
         [self startAlarmSound];
         
         if([[alarms objectAtIndex:nextAlarmNum] isSetToVibrate])
@@ -126,7 +119,7 @@
             [self toggleFlashlight];
         }
       
-        [self popUpForDismissAlarm];
+       
     }
     else
     {
@@ -136,46 +129,37 @@
 }
 
 
+-(void)becameActive
+{
+    if(isTorchOn)
+        [self toggleFlashlight];
+        [self toggleFlashlight];
+}
+
 - (void)toggleFlashlight
 {
-    if(device.hasTorch == NO)
-    {
-        NSLog(@"Device has no torch");
-        return;
-    }
     
-    if (device.torchMode == AVCaptureTorchModeOff)
-    {
-        // Create an AV session
-        AVCaptureSession *session = [[AVCaptureSession alloc] init];
+    NSLog(@"IN Toggle flashlight");
+    Class captureDeviceClass = NSClassFromString(@"AVCaptureDevice");
+    
+    if (captureDeviceClass != nil) {
+        AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
         
-        // Create device input and add to current session
-        AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error: nil];
-        [session addInput:input];
-        
-        // Create video output and add to current session
-        AVCaptureVideoDataOutput *output = [[AVCaptureVideoDataOutput alloc] init];
-        [session addOutput:output];
-        
-        // Start session configuration
-        [session beginConfiguration];
-        [device lockForConfiguration:nil];
-        
-        // Set torch to on
-        [device setTorchMode:AVCaptureTorchModeOn];
-        
-        [device unlockForConfiguration];
-        [session commitConfiguration];
-        
-        // Start the session
-        [session startRunning];
-        
-        // Keep the session around
-      //  [self setAVSession:session];
-    }
-    else
-    {
-        [AVSession stopRunning];
+        if ([device hasTorch] && [device hasFlash]){
+            [device lockForConfiguration:nil];
+            if (!isTorchOn) {
+                [device setTorchMode:AVCaptureTorchModeOn];
+                [device setFlashMode:AVCaptureFlashModeOn];
+                isTorchOn = YES;
+            }
+            else
+            {
+                [device setTorchMode:AVCaptureTorchModeOff];
+                [device setFlashMode:AVCaptureFlashModeOff];
+                isTorchOn = NO;
+            }
+            [device unlockForConfiguration];
+        }
     }
 }
 
@@ -251,7 +235,11 @@
 {
     [player stop];
     isAlarmActive = NO;
- 
+    
+    //turn off flashlight if on
+    if(isTorchOn)
+        [self toggleFlashlight];
+    
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     if([title isEqualToString:@"OFF"])
     {

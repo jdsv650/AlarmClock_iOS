@@ -36,9 +36,6 @@
         alarms = [[NSMutableArray alloc] init];
     }
     
-   // do later
-    //[self fetchAlarms];
-        
     // for background
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     [[AVAudioSession sharedInstance] setActive: YES error: nil];

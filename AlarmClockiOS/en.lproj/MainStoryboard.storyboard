@@ -467,7 +467,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="action" name="returnToMainPage:"/>
                 <relationship kind="action" name="saveAlarm:"/>
                 <relationship kind="outlet" name="alarmDatePickerOutlet" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="alarmOnOffToggleOutlet" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="removeButtonOutlet" candidateClass="UIButton"/>
             </relationships>
         </class>
@@ -487,7 +486,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="addAlarmPressed:"/>
                 <relationship kind="action" name="nextAlarmPressed:"/>
-                <relationship kind="outlet" name="currentTime2Outlet" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="currentTimeOutlet" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="nextAlarmOutlet" candidateClass="UIButton"/>
             </relationships>

@@ -14,7 +14,7 @@
 @interface AlarmTimeViewController ()
 {
     __weak IBOutlet UIDatePicker *alarmDatePickerOutlet;
-    __weak IBOutlet UIButton *alarmOnOffToggleOutlet;
+   // __weak IBOutlet UIButton *alarmOnOffToggleOutlet;
     __weak IBOutlet UIButton *removeButtonOutlet;
     MMAlarmMainViewController *avc;
     MMTableViewController *tvc;
@@ -144,8 +144,11 @@
 
 - (IBAction)RemoveAlarm:(id)sender
 {
-    [alarms removeObjectAtIndex:alarmNumberToEdit];
-    [[tvc tableView] reloadData];
+    if(alarms.count >= 1)   //if the alarm goes off when we are editing it don't try to remove it again 
+    {
+        [alarms removeObjectAtIndex:alarmNumberToEdit];
+        [[tvc tableView] reloadData];
+    }
     [self returnToMainPage:sender];
 }
 
