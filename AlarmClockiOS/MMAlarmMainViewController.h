@@ -12,7 +12,6 @@
 
 @interface MMAlarmMainViewController : UIViewController <UIAlertViewDelegate>
 
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property NSMutableArray *alarms;
 @property MMAlarmDetails *myNewAlarm;
 @property int alarmNumberToEdit;
