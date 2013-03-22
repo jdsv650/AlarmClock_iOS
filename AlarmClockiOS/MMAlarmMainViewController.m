@@ -40,11 +40,11 @@
 {
     [super viewDidLoad];
     
-<<<<<<< HEAD
-=======
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becameActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     
->>>>>>> coredata
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becameBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+
+    
     // for background
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     [[AVAudioSession sharedInstance] setActive: YES error: nil];
@@ -59,35 +59,20 @@
     isTorchOn = NO;
     isEdit = NO;
     
-<<<<<<< HEAD
     if(!alarms) {
        nextAlarmNum = -1;
        nextAlarmOutlet.enabled = NO;
        alarmNumberToEdit = -1;
     }
-=======
+    
     nextAlarmNum = -1;
     nextAlarmOutlet.enabled = NO;
     alarmNumberToEdit = -1;
->>>>>>> coredata
- 
+
     SEL sel = @selector(updateTime);
     timerToUpdateCurrentTime = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:sel userInfo:nil repeats:YES];
 }
 
-
-- (void) viewDidAppear:(BOOL)animated
-{
-<<<<<<< HEAD
-   // isAlarmActive= NO;
-    //-1 no alarms out of bounds
-   // nextAlarmNum = alarms.count-1;
-   // isEdit = NO;
-    
-=======
-  //  isAlarmActive= NO;
->>>>>>> coredata
-}
 
 - (void)updateTime
 {
@@ -151,9 +136,17 @@
 
 -(void)becameActive
 {
-    if(isTorchOn)
-        [self toggleFlashlight];
-        [self toggleFlashlight];
+   // if(isTorchOn)
+   //     [self toggleFlashlight];
+   //     [self toggleFlashlight];
+}
+
+
+-(void)becameBackground
+{
+     if(isTorchOn)
+         [self toggleFlashlight];
+         [self toggleFlashlight];
 }
 
 - (void)toggleFlashlight
