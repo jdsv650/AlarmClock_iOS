@@ -34,12 +34,6 @@
     
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     alarmNumberToEdit = [[[self tableView] indexPathForSelectedRow] row];
@@ -79,8 +73,6 @@
     [formatter setDateFormat:@"MM/dd/yyyy hh:mm:ss a V"];
 
     cell.textLabel.text = [formatter stringFromDate:[[alarms objectAtIndex:indexPath.row] alarmDateTime]];
- 
-   // cell.textLabel.text = [NSString stringWithFormat:@"%@", [[alarms objectAtIndex:indexPath.row] alarmDateTime]];
     return cell;
 }
 
@@ -115,5 +107,11 @@
 
 - (IBAction)returnToMainPage:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 @end

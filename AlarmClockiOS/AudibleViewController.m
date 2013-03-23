@@ -34,7 +34,6 @@
 {
     [super viewDidLoad];
     
-    
     if([self.presentingViewController isKindOfClass:[MMTableViewController class]])
     {
         tvc = (MMTableViewController*) self.presentingViewController;
@@ -42,8 +41,8 @@
     }
     else
     {
-    avc = (MMAlarmMainViewController*) self.presentingViewController;
-    myNewAlarm = avc.myNewAlarm;
+        avc = (MMAlarmMainViewController*) self.presentingViewController;
+        myNewAlarm = avc.myNewAlarm;
     }
     
     sounds = [[NSArray alloc] initWithObjects:@"Alarm Clock", @"Car Alarm", @"Evacuate", @"Rooster", @"Tornado Siren", nil];
@@ -56,8 +55,6 @@
     }
     else
          audibleImageViewOutlet.image = [UIImage imageNamed:@"bell.png"];
-    
-   
 
     int num = 0;
     if([[myNewAlarm alarmSound] isEqualToString:@"Alarm Clock"])
@@ -86,12 +83,6 @@
     }
 
     [soundPickerOutlet selectRow:num inComponent:0 animated:YES];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 //datasource
@@ -126,9 +117,8 @@
 }
 
 
-- (IBAction)toggleVolumeOnOff:(id)sender {
-    
-    
+- (IBAction)toggleVolumeOnOff:(id)sender
+{
     if ([sender isOn])
     {
         volumeOutlet.value = 0.5f;
@@ -157,4 +147,11 @@
         audibleImageViewOutlet.image = [UIImage imageNamed:@"bell.png"];
     }
 }
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 @end

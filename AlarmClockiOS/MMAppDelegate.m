@@ -9,11 +9,9 @@
 #import "MMAppDelegate.h"
 #import "MMAlarmMainViewController.h"
 #import "MMAlarmDetails.h"  
-#import <AVFoundation/AVFoundation.h>
 
 @interface MMAppDelegate ()
 {
-    AVAudioPlayer *player;
     MMAlarmMainViewController *mainViewController;
 }
 @end
@@ -28,36 +26,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    NSLog(@"applcationdidFinishLaunchingWithOptions");
+    //NSLog(@"applcationdidFinishLaunchingWithOptions");
     mainViewController = (MMAlarmMainViewController *)self.window.rootViewController;
     
     if(!alarms) {
-        NSLog(@"alarms == nil alloc new array");
         alarms = [[NSMutableArray alloc] init];
     }
-    
-    // for background
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-    [[AVAudioSession sharedInstance] setActive: YES error: nil];
-    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-    
-    // without this block first alarm run from back fails
-//    NSString *soundFileString = [NSString stringWithFormat:@"%@/silence_10.mp3", [[NSBundle mainBundle] resourcePath]];
-//    NSURL *soundFileURL = [NSURL URLWithString:soundFileString];
-//    player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
-//    player.volume = 0.2;
-//    player.numberOfLoops = -1; //keep playing
-//    [player play];
-//    if([player isPlaying])
-//        [player stop];
-    
-//    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-//    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:60];
-//    localNotification.soundName = UILocalNotificationDefaultSoundName;
-//    localNotification.alertBody = @"Local Notification Body : Some Alert";
-//    localNotification.alertAction = @"Action String";
-//    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-
     return YES;
 }
 
@@ -72,13 +46,10 @@
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"AlarmDetails"
-                                          inManagedObjectContext:[self managedObjectContext]];
+                                              inManagedObjectContext:[self managedObjectContext]];
     [fetchRequest setEntity:entity];
     
-    NSLog(@"IN buildAlarms");
-    
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"alarmDateTime" ascending:NO];
-    
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     [fetchRequest setSortDescriptors:sortDescriptors];
 
@@ -91,9 +62,9 @@
     
     for(NSManagedObject *mObj in fetchedObjects)
     {
-        NSLog(@"NEXT Managed Object has values == ");
-        NSLog(@"%@",[mObj valueForKey:@"alarmDateTime"]);
-        NSLog(@"%@",[mObj valueForKey:@"isSnoozeEnabled"]);
+        //NSLog(@"NEXT Managed Object has values == ");
+        //NSLog(@"%@",[mObj valueForKey:@"alarmDateTime"]);
+        //NSLog(@"%@",[mObj valueForKey:@"isSnoozeEnabled"]);
         
         MMAlarmDetails *nextAlarm = [[MMAlarmDetails alloc] init];
         nextAlarm.alarmDateTime = [mObj valueForKey:@"alarmDateTime"];
@@ -106,9 +77,6 @@
         nextAlarm.isSetToFlash = [[mObj valueForKey:@"isSetToFlash"] boolValue];
         [alarms addObject:nextAlarm];
     }
-    
-    //build this instead -->see above 
-    //alarms = [NSMutableArray arrayWithArray:fetchedObjects];
     
     //setup alarms array in the main view controller
     mainViewController.alarms = alarms;
@@ -124,21 +92,7 @@
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
         
-    //    application.applicationIconBadgeNumber = 0;
-    
-     //   NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Car_Alarm.mp3", [[NSBundle mainBundle] resourcePath]]];
-        
-//        NSError *error;
-//        player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-//        player.numberOfLoops = -1;
-//        
-//        if (player == nil)
-//            NSLog(@"%@", [error description]);
-//        else
-//            [player play];
-//        
 }
-
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -150,14 +104,7 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    
-//    NSString *soundFileString = [NSString stringWithFormat:@"%@/silence_10.mp3", [[NSBundle mainBundle] resourcePath]];
-//    NSURL *soundFileURL = [NSURL URLWithString:soundFileString];
-//    player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
-//    player.volume = 0.2;
-//    player.numberOfLoops = -1; //keep playing
-//    [player play];
-//    
+       
     //save data
     [self saveAlarms];
     
@@ -165,9 +112,9 @@
     {
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
         
-        //set next alarm as UILocalNotification instead (purge these on foreground)
+        //set next alarm as UILocalNotification (purge these on foreground)
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-        //  localNotification.timeZone = [NSTimeZone defaultTimeZone];
+        localNotification.timeZone = [NSTimeZone defaultTimeZone];
         localNotification.fireDate = [[alarms lastObject] alarmDateTime];
         localNotification.repeatInterval = NSMinuteCalendarUnit;
         
@@ -190,16 +137,12 @@
         if([msg compare:@""] == 0){
             msg = @"Alarm Active"; //needed for notification to display
         }
-        
         localNotification.alertBody = msg;//@"Wake up";
         localNotification.alertAction = @"View";
         
-        // localNotification.hasAction = YES;  NOT COOL TO USE THIS Statement sound doesn't play
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
         
-        // 2ND NOTIFICATION
-        
-        //set next alarm as UILocalNotification instead (purge these on foreground)
+        // 2nd notification (20sec on 10 off then 20sec on and 10 off with second notiification)
         UILocalNotification *localNotification2 = [[UILocalNotification alloc] init];
         localNotification2.timeZone = [NSTimeZone defaultTimeZone];
         localNotification2.fireDate = [[[alarms lastObject] alarmDateTime] dateByAddingTimeInterval:30];
@@ -218,8 +161,7 @@
     {
         NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:@"AlarmDetails"
                      inManagedObjectContext:[self managedObjectContext]];
-        
-        //[newManagedObject ];
+     
         [newManagedObject setValue:[[alarms objectAtIndex:i] alarmDateTime] forKey:@"alarmDateTime"];
         [newManagedObject setValue:[[alarms objectAtIndex:i] alarmSound] forKey:@"alarmSound"];
         [newManagedObject setValue:[[alarms objectAtIndex:i] alarmMessage] forKey:@"alarmMessage"];
@@ -240,27 +182,22 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    NSLog(@"applicationDidBecomeActive");
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
-//    if([player isPlaying])
-//        [player stop];
-
+    // NSLog(@"applicationDidBecomeActive");
+    
     if(!alarms) {
-        NSLog(@"alarms == nil alloc new array");
         alarms = [[NSMutableArray alloc] init];
     }
     
     if(alarms)
     {
         //restart fetch alarms
-        NSLog(@"alarms ! nil so fetching into from db");
         [self fetchAlarms];
     }
     
     //cancel notifications on fg
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

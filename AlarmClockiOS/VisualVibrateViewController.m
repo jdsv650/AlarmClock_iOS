@@ -67,12 +67,6 @@
     
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
 {
     myAlarm.alarmMessage = textField.text;
@@ -80,7 +74,9 @@
     return YES;
 }
 
-- (IBAction)throwVibrateSwitch:(id)sender {
+- (IBAction)throwVibrateSwitch:(id)sender
+{
+    
     myAlarm.isSetToVibrate = vibrateSwitch.isOn;
     if(vibrateSwitch.on == YES)
     {
@@ -90,7 +86,8 @@
         vibrateImageViewOutlet.image = [UIImage imageNamed:@"ipod_cast_off.png"];
 }
 
-- (IBAction)throwFlashlightSwitch:(id)sender {
+- (IBAction)throwFlashlightSwitch:(id)sender
+{
     myAlarm.isSetToFlash = flashlightSwitch.isOn;
     if(flashlightSwitch.on == YES)
     {
@@ -100,4 +97,11 @@
         flashlightImageViewOutlet.image = [UIImage imageNamed:@"lightbulb_off.png"];
     
 }
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 @end

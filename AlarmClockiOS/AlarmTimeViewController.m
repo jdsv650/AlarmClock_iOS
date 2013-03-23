@@ -46,7 +46,6 @@
         alarmNumberToEdit = tvc.alarmNumberToEdit;
         isNewAlarm = NO;
         removeButtonOutlet.hidden = NO;
-    
     }
     else //ADD alarm coming from MMAlarmMainViewController -- OR edit next alarm
     {
@@ -66,7 +65,7 @@
         removeButtonOutlet.hidden = YES;
         }
     }
-     NSLog(@"Alarms = %@", alarms);
+    //NSLog(@"Alarms = %@", alarms);
         
     [alarmDatePickerOutlet setDatePickerMode:UIDatePickerModeTime];
     alarmDatePickerOutlet.date = myAlarm.alarmDateTime;
@@ -77,7 +76,6 @@
     NSComparisonResult result;
     
     NSDate *origDateFromPicker = [alarmDatePickerOutlet date];
-    //NSDate *dateFromPicker = [[NSDate alloc] init];
     
     // make the seconds part of alarm we are setting = 0
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -128,7 +126,7 @@
     
     myAlarm.alarmDateTime = dateFromPicker;
     
-    NSLog(@"sound = %@  datetime = %@   volume = %f   snooze interval = %d", myAlarm.alarmSound, [formatter stringFromDate:myAlarm.alarmDateTime], myAlarm.alarmVolume, myAlarm.snoozeDuration);
+    //NSLog(@"sound = %@  datetime = %@   volume = %f   snooze interval = %d", myAlarm.alarmSound, [formatter stringFromDate:myAlarm.alarmDateTime], myAlarm.alarmVolume, myAlarm.snoozeDuration);
     
     if(isNewAlarm)
     {
@@ -143,6 +141,7 @@
         [alarms insertObject:myAlarm atIndex:idx];
         [[tvc tableView] reloadData];
     }
+    
     avc.alarms = alarms;
     [self dismissViewControllerAnimated:YES completion:^ void {}];
 }

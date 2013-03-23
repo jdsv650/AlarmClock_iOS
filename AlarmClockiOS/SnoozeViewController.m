@@ -12,23 +12,20 @@
 
 @interface SnoozeViewController ()
 {
-    
     __weak IBOutlet UIImageView *snoozeImageViewOutlet;
     __weak IBOutlet UISwitch *snoozeSwitch;
     __weak IBOutlet UILabel *snoozeLabel;
     __weak IBOutlet UIStepper *snoozeStepper;
-     MMAlarmMainViewController *avc;
+    MMAlarmMainViewController *avc;
     MMTableViewController *tvc;
 }
 - (IBAction)snoozeStepper:(id)sender;
 - (IBAction)turnSnoozeOnOff:(id)sender;
 
-
 @end
 
 @implementation SnoozeViewController
 @synthesize myAlarm;
-
 
 - (void)viewDidLoad
 {
@@ -41,11 +38,12 @@
     }
     else
     {
-    avc = (MMAlarmMainViewController*) self.presentingViewController;
-    myAlarm = avc.myNewAlarm;
+        avc = (MMAlarmMainViewController*) self.presentingViewController;
+        myAlarm = avc.myNewAlarm;
     }
     
     snoozeSwitch.on = myAlarm.isSnoozeEnabled;
+    
     if(snoozeSwitch.on == YES)
     {
         snoozeImageViewOutlet.image = [UIImage imageNamed:@"link_break.png"];
@@ -53,19 +51,7 @@
     else
         snoozeImageViewOutlet.image = [UIImage imageNamed:@"link_break_off.png"];
     
-    snoozeLabel.text = [NSString stringWithFormat:@"%d", myAlarm.snoozeDuration];
-    
-}
-
-
-
-
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    snoozeLabel.text = [NSString stringWithFormat:@"%d", myAlarm.snoozeDuration];    
 }
 
 - (IBAction)snoozeStepper:(id)sender {
@@ -73,6 +59,7 @@
     
     myAlarm.snoozeDuration = stepper.value;
     snoozeLabel.text = [NSString stringWithFormat:@"%d", (int) stepper.value];
+    
     if(stepper.value == 0)
     {
         snoozeSwitch.on = NO;
@@ -87,7 +74,6 @@
 
 - (IBAction)turnSnoozeOnOff:(id)sender {
     if(snoozeSwitch.on == NO) {
-        // snoozeStepper.enabled = NO;
         myAlarm.isSnoozeEnabled = NO;
         snoozeImageViewOutlet.image = [UIImage imageNamed:@"link_break_off.png"];
         snoozeStepper.value = 0;
@@ -95,11 +81,17 @@
     }
     else
     {
-        // snoozeStepper.enabled = YES;
         myAlarm.isSnoozeEnabled = YES;
         snoozeStepper.value = 10;
         snoozeImageViewOutlet.image = [UIImage imageNamed:@"link_break.png"];
         snoozeLabel.text = [NSString stringWithFormat:@"%d", (int) snoozeStepper.value];
     }
 }
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 @end

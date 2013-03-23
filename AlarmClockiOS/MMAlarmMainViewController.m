@@ -41,29 +41,15 @@
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becameActive) name:UIApplicationDidBecomeActiveNotification object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becameBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
-
-    
-    // for background
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-    [[AVAudioSession sharedInstance] setActive: YES error: nil];
-    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     
     formatter = [[NSDateFormatter alloc] init];
     [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
     [formatter setDateFormat:@"MM/dd/yyyy hh:mm:ss a V"];
-    //@"MM/dd/yyyy HH:mm:ss a"
        
     isAlarmActive= NO;
     isTorchOn = NO;
     isEdit = NO;
-    
-    if(!alarms) {
-       nextAlarmNum = -1;
-       nextAlarmOutlet.enabled = NO;
-       alarmNumberToEdit = -1;
-    }
     
     nextAlarmNum = -1;
     nextAlarmOutlet.enabled = NO;
@@ -78,7 +64,7 @@
 {
     if(alarms.count <= 0) {
         [nextAlarmOutlet setTitle:@"No Alarms" forState:UIControlStateNormal];
-        NSLog(@"NO ALARMS FOUND");
+        //NSLog(@"NO ALARMS FOUND");
         alarmNumberToEdit = -1;
         nextAlarmOutlet.enabled = NO;
     }
@@ -92,7 +78,6 @@
     }
     
     NSDate *now = [[NSDate alloc] init];
-    
     currentTimeOutlet.text = [formatter stringFromDate:now];
     
     //MAKE sure next alarm is set ***** or will do nothing here
@@ -100,36 +85,32 @@
     
     if(nextAlarmNum < 0 || isAlarmActive)
     {
-       // NSLog(@"DO NOTHING");
         //do nothing
-     //   NSLog(@"No alarm found or active alarm");
+        //NSLog(@"No alarm found or active alarm");
     }
     else
-        if (([[[NSDate alloc] init] compare:[[alarms objectAtIndex:nextAlarmNum] alarmDateTime]] == NSOrderedDescending) ||
-            ([[[NSDate alloc] init] compare:[[alarms objectAtIndex:nextAlarmNum] alarmDateTime]] == NSOrderedSame))
+        if (([now compare:[[alarms objectAtIndex:nextAlarmNum] alarmDateTime]] == NSOrderedDescending) ||
+            ([now compare:[[alarms objectAtIndex:nextAlarmNum] alarmDateTime]] == NSOrderedSame))
         
-    {
-        isAlarmActive = YES;
-        
-        [self popUpForDismissAlarm];
-        [self startAlarmSound];
-        
-        if([[alarms objectAtIndex:nextAlarmNum] isSetToVibrate])
         {
-            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        }
+            isAlarmActive = YES;
+            [self popUpForDismissAlarm];
+            [self startAlarmSound];
         
-        if([[alarms objectAtIndex:nextAlarmNum] isSetToFlash])
-        {
-            [self toggleFlashlight:YES];
+            if([[alarms objectAtIndex:nextAlarmNum] isSetToVibrate])
+            {
+                AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+            }
+        
+            if([[alarms objectAtIndex:nextAlarmNum] isSetToFlash])
+            {
+                [self toggleFlashlight:YES];
+            }
         }
-      
-       
-    }
-    else
-    {
-       // NSLog(@"Not time yet");
-    }
+        else
+        {
+            // NSLog(@"Not time yet");
+        }
     
 }
 
@@ -178,30 +159,31 @@
 
 -(void) startAlarmSound
 {
-    //Sound alarm
-    NSString *soundFilePath;
+//    if([[[alarms objectAtIndex:nextAlarmNum] alarmSound] isEqualToString:@"Alarm Clock"])
+//    {
+//        soundFilePath = [NSString stringWithFormat:@"%@/Alarm_Clock.mp3", [[NSBundle mainBundle] resourcePath]];
+//    }
+//    else if([[[alarms objectAtIndex:nextAlarmNum] alarmSound] isEqualToString:@"Car Alarm"])
+//    {
+//         soundFilePath = [NSString stringWithFormat:@"%@/Car_Alarm.mp3", [[NSBundle mainBundle] resourcePath]];
+//    }
+//    else if([[[alarms objectAtIndex:nextAlarmNum] alarmSound] isEqualToString:@"Evacuate"])
+//    {
+//        soundFilePath = [NSString stringWithFormat:@"%@/Evacuate.mp3", [[NSBundle mainBundle] resourcePath]];
+//    }
+//    else if([[[alarms objectAtIndex:nextAlarmNum] alarmSound] isEqualToString:@"Rooster"])
+//    {
+//        soundFilePath = [NSString stringWithFormat:@"%@/Rooster.mp3", [[NSBundle mainBundle] resourcePath]];
+//    }
+//    else
+//        soundFilePath = [NSString stringWithFormat:@"%@/Tornado_Siren.mp3", [[NSBundle mainBundle] resourcePath]];
     
-    if([[[alarms objectAtIndex:nextAlarmNum] alarmSound] isEqualToString:@"Alarm Clock"])
-    {
-        soundFilePath = [NSString stringWithFormat:@"%@/Alarm_Clock.mp3", [[NSBundle mainBundle] resourcePath]];
-    }
-    else if([[[alarms objectAtIndex:nextAlarmNum] alarmSound] isEqualToString:@"Car Alarm"])
-    {
-         soundFilePath = [NSString stringWithFormat:@"%@/Car_Alarm.mp3", [[NSBundle mainBundle] resourcePath]];
-    }
-    else if([[[alarms objectAtIndex:nextAlarmNum] alarmSound] isEqualToString:@"Evacuate"])
-    {
-        soundFilePath = [NSString stringWithFormat:@"%@/Evacuate.mp3", [[NSBundle mainBundle] resourcePath]];
-    }
-    else if([[[alarms objectAtIndex:nextAlarmNum] alarmSound] isEqualToString:@"Rooster"])
-    {
-        soundFilePath = [NSString stringWithFormat:@"%@/Rooster.mp3", [[NSBundle mainBundle] resourcePath]];
-    }
-    else
-        soundFilePath = [NSString stringWithFormat:@"%@/Tornado_Siren.mp3", [[NSBundle mainBundle] resourcePath]];
+    //build file name as string
+    NSString *nameWithUnderscore = [[[alarms lastObject] alarmSound] stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+    NSString *soundFileString  = [NSString stringWithFormat:@"%@/%@.mp3", [[NSBundle mainBundle] resourcePath], nameWithUnderscore];
     
-    
-    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+    //file name as URL
+    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFileString];
     
     player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
     player.volume = [[alarms objectAtIndex:nextAlarmNum] alarmVolume];
@@ -255,13 +237,13 @@
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     if([title isEqualToString:@"OFF"])
     {
-        NSLog(@"OFF button was selected.");
+        //NSLog(@"OFF button was selected.");
         if(alarms.count > 0)
             [alarms removeLastObject];
     }
     else if([title isEqualToString:@"Snooze"])
     {
-        NSLog(@"Snooze button was selected.");
+        //NSLog(@"Snooze button was selected.");
         MMAlarmDetails *snoozeAlarm = [alarms lastObject];
         [snoozeAlarm setAlarmDateTime:[[snoozeAlarm alarmDateTime] dateByAddingTimeInterval:[snoozeAlarm snoozeDuration] * 60]];
         if(alarms.count > 0)
