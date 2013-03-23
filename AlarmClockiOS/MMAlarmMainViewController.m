@@ -121,7 +121,7 @@
         
         if([[alarms objectAtIndex:nextAlarmNum] isSetToFlash])
         {
-            [self toggleFlashlight];
+            [self toggleFlashlight:YES];
         }
       
        
@@ -136,20 +136,19 @@
 
 -(void)becameActive
 {
-   // if(isTorchOn)
-   //     [self toggleFlashlight];
-   //     [self toggleFlashlight];
+    if(alarms.count >= 1 && [[alarms lastObject] isSetToFlash])
+    {
+        [self toggleFlashlight:YES];
+    }
 }
 
 
 -(void)becameBackground
 {
-     if(isTorchOn)
-         [self toggleFlashlight];
-         [self toggleFlashlight];
+   
 }
 
-- (void)toggleFlashlight
+- (void)toggleFlashlight:(BOOL) isOn
 {
     
     NSLog(@"IN Toggle flashlight");
@@ -160,7 +159,7 @@
         
         if ([device hasTorch] && [device hasFlash]){
             [device lockForConfiguration:nil];
-            if (!isTorchOn) {
+            if (isOn) {
                 [device setTorchMode:AVCaptureTorchModeOn];
                 [device setFlashMode:AVCaptureFlashModeOn];
                 isTorchOn = YES;
@@ -251,7 +250,7 @@
     
     //turn off flashlight if on
     if(isTorchOn)
-        [self toggleFlashlight];
+        [self toggleFlashlight:NO];
     
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     if([title isEqualToString:@"OFF"])

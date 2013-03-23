@@ -76,8 +76,19 @@
     int idx;
     NSComparisonResult result;
     
-    NSDate *dateFromPicker = [alarmDatePickerOutlet date];
-   // NSDate *now = [[NSDate alloc] init];
+    NSDate *origDateFromPicker = [alarmDatePickerOutlet date];
+    //NSDate *dateFromPicker = [[NSDate alloc] init];
+    
+    // make the seconds part of alarm we are setting = 0
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *dateComponents = [calendar components:( NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit ) fromDate:origDateFromPicker];
+    NSDateComponents *timeComponents = [calendar components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:origDateFromPicker];
+    
+    [dateComponents setHour:[timeComponents hour]];
+    [dateComponents setMinute:[timeComponents minute]];
+    [dateComponents setSecond:0.0];
+    
+    NSDate *dateFromPicker = [calendar dateFromComponents:dateComponents];
     
     if(!isNewAlarm)
     {

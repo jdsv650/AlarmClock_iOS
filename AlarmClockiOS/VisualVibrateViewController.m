@@ -31,6 +31,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [vibrateImageViewOutlet setHidden:YES];
+    [vibrateSwitch setHidden:YES];
 	
     if([self.presentingViewController isKindOfClass:[MMTableViewController class]])  //edit alarm
     {

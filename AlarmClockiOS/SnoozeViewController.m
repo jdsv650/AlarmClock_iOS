@@ -48,10 +48,10 @@
     snoozeSwitch.on = myAlarm.isSnoozeEnabled;
     if(snoozeSwitch.on == YES)
     {
-        snoozeImageViewOutlet.image = [UIImage imageNamed:@"control_pause.png"];
+        snoozeImageViewOutlet.image = [UIImage imageNamed:@"link_break.png"];
     }
     else
-        snoozeImageViewOutlet.image = [UIImage imageNamed:@"control_off.png"];
+        snoozeImageViewOutlet.image = [UIImage imageNamed:@"link_break_off.png"];
     
     snoozeLabel.text = [NSString stringWithFormat:@"%d", myAlarm.snoozeDuration];
     
@@ -73,23 +73,33 @@
     
     myAlarm.snoozeDuration = stepper.value;
     snoozeLabel.text = [NSString stringWithFormat:@"%d", (int) stepper.value];
-    
+    if(stepper.value == 0)
+    {
+        snoozeSwitch.on = NO;
+        snoozeImageViewOutlet.image = [UIImage imageNamed:@"link_break_off.png"];
+    }
+    else
+    {
+        snoozeSwitch.on = YES;
+        snoozeImageViewOutlet.image = [UIImage imageNamed:@"link_break.png"];
+    }
 }
 
 - (IBAction)turnSnoozeOnOff:(id)sender {
     if(snoozeSwitch.on == NO) {
-        snoozeStepper.enabled = NO;
+        // snoozeStepper.enabled = NO;
         myAlarm.isSnoozeEnabled = NO;
-        snoozeLabel.text = @"Snooze Off";
-        snoozeImageViewOutlet.image = [UIImage imageNamed:@"control _off.png"];
+        snoozeImageViewOutlet.image = [UIImage imageNamed:@"link_break_off.png"];
+        snoozeStepper.value = 0;
+        snoozeLabel.text = @"0";
     }
     else
     {
-        snoozeStepper.enabled = YES;
+        // snoozeStepper.enabled = YES;
         myAlarm.isSnoozeEnabled = YES;
+        snoozeStepper.value = 10;
+        snoozeImageViewOutlet.image = [UIImage imageNamed:@"link_break.png"];
         snoozeLabel.text = [NSString stringWithFormat:@"%d", (int) snoozeStepper.value];
-        snoozeImageViewOutlet.image = [UIImage imageNamed:@"control_pause.png"];
     }
-    
 }
 @end
