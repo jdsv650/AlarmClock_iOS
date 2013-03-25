@@ -17,6 +17,9 @@
     __weak IBOutlet UISlider *volumeOutlet;
     __weak IBOutlet UIPickerView *soundPickerOutlet;
     __weak IBOutlet UISwitch *volumeOnOffOutlet;
+    __weak IBOutlet UILabel *volumeLabelOutlet;
+    __weak IBOutlet UIImageView *volumeImageViewOutlet;
+    __weak IBOutlet UISlider *sliderOutlet;
     MMAlarmMainViewController *avc;
     MMTableViewController *tvc;
     
@@ -33,6 +36,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    volumeLabelOutlet.hidden = YES;
+    volumeImageViewOutlet.hidden = YES;
+    sliderOutlet.hidden = YES;
     
     if([self.presentingViewController isKindOfClass:[MMTableViewController class]])
     {
@@ -154,4 +161,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidUnload {
+    volumeLabelOutlet = nil;
+    volumeImageViewOutlet = nil;
+    sliderOutlet = nil;
+    [super viewDidUnload];
+}
 @end

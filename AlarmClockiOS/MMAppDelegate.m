@@ -116,21 +116,31 @@
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
         localNotification.timeZone = [NSTimeZone defaultTimeZone];
         localNotification.fireDate = [[alarms lastObject] alarmDateTime];
-        localNotification.repeatInterval = NSMinuteCalendarUnit;
+       // localNotification.repeatInterval = NSMinuteCalendarUnit;
         
         NSString *soundName;
         
-        if([[alarms lastObject] alarmVolume] == 0)
+        // no sound and vibrate on (vibrate only) use silent sound for vib 
+        if([[alarms lastObject] alarmVolume] == 0 && [[alarms lastObject] isSetToVibrate] == YES)
         {
             soundName = @"silence_20.mp3";
+            localNotification.soundName = soundName;
+            localNotification.repeatInterval = NSMinuteCalendarUnit;
         }
-        else
+        else if([[alarms lastObject] alarmVolume] == 0 && [[alarms lastObject] isSetToVibrate] == NO)   //no sound or vib
+        {
+             //localNotification.soundName should not be set
+             //reset repeatinterval to show message every second
+            localNotification.repeatInterval = NSSecondCalendarUnit;
+            
+        }
+        else   //play sound (+ will vibrate)
         {
             NSString *temp = [[[alarms lastObject] alarmSound] stringByReplacingOccurrencesOfString:@" " withString:@"_"];
             soundName = [temp stringByAppendingString:@"_20.mp3"];
+              localNotification.repeatInterval = NSMinuteCalendarUnit;
         }
         
-        localNotification.soundName = soundName;
         // localNotification.soundName = UILocalNotificationDefaultSoundName;
         
         NSString *msg = [[alarms lastObject] alarmMessage];
@@ -142,15 +152,18 @@
         
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
         
-        // 2nd notification (20sec on 10 off then 20sec on and 10 off with second notiification)
-        UILocalNotification *localNotification2 = [[UILocalNotification alloc] init];
-        localNotification2.timeZone = [NSTimeZone defaultTimeZone];
-        localNotification2.fireDate = [[[alarms lastObject] alarmDateTime] dateByAddingTimeInterval:30];
-        localNotification2.repeatInterval = NSMinuteCalendarUnit;
-        localNotification2.soundName = soundName;
-        localNotification2.alertBody = msg;
-        localNotification2.alertAction = @"View";
-        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification2];
+        if(localNotification.repeatInterval == NSMinuteCalendarUnit)  //else no need for second notif
+        {
+            // 2nd notification (20sec on 10 off then 20sec on and 10 off with second notiification)
+            UILocalNotification *localNotification2 = [[UILocalNotification alloc] init];
+            localNotification2.timeZone = [NSTimeZone defaultTimeZone];
+            localNotification2.fireDate = [[[alarms lastObject] alarmDateTime] dateByAddingTimeInterval:30];
+            localNotification2.repeatInterval = NSMinuteCalendarUnit;
+            localNotification2.soundName = soundName;
+            localNotification2.alertBody = msg;
+            localNotification2.alertAction = @"View";
+            [[UIApplication sharedApplication] scheduleLocalNotification:localNotification2];
+        }
     }
     
 }
@@ -213,8 +226,84 @@
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            [self displayValidationError:error];
+            //NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
+        }
+    }
+}
+
+
+- (void)displayValidationError:(NSError *)anError {
+    if (anError && [[anError domain] isEqualToString:@"NSCocoaErrorDomain"]) {
+        NSArray *errors = nil;
+        
+        // multiple errors?
+        if ([anError code] == NSValidationMultipleErrorsError) {
+            errors = [[anError userInfo] objectForKey:NSDetailedErrorsKey];
+        } else {
+            errors = [NSArray arrayWithObject:anError];
+        }
+        
+        if (errors && [errors count] > 0) {
+            NSString *messages = @"Reason(s):\n";
+            
+            for (NSError * error in errors) {
+                NSString *entityName = [[[[error userInfo] objectForKey:@"NSValidationErrorObject"] entity] name];
+                NSString *attributeName = [[error userInfo] objectForKey:@"NSValidationErrorKey"];
+                NSString *msg;
+                switch ([error code]) {
+                    case NSManagedObjectValidationError:
+                        msg = @"Unrecoverable error: core data managed object validation error.";
+                        break;
+                    case NSValidationMissingMandatoryPropertyError:
+                        msg = [NSString stringWithFormat:@"Unrecoverable error: attribute '%@' must exist.", attributeName];
+                        break;
+                    case NSValidationRelationshipLacksMinimumCountError:
+                        msg = [NSString stringWithFormat:@"Unrecoverable error: the relationship '%@' doesn't have enough entries.", attributeName];
+                        break;
+                    case NSValidationRelationshipExceedsMaximumCountError:
+                        msg = [NSString stringWithFormat:@"Unrecoverable error: the relationship '%@' has too many entries.", attributeName];
+                        break;
+                    case NSValidationRelationshipDeniedDeleteError:
+                        msg = [NSString stringWithFormat:@"Unrecoverable error: to delete, the relationship '%@' must be empty.", attributeName];
+                        break;
+                    case NSValidationNumberTooLargeError:
+                        msg = [NSString stringWithFormat:@"Unrecoverable error: the number of the attribute '%@' is too large.", attributeName];
+                        break;
+                    case NSValidationNumberTooSmallError:
+                        msg = [NSString stringWithFormat:@"Unrecoverable error: the number of the attribute '%@' is too small.", attributeName];
+                        break;
+                    case NSValidationDateTooLateError:
+                        msg = [NSString stringWithFormat:@"Unrecoverable error: the date of the attribute '%@' is too late.", attributeName];
+                        break;
+                    case NSValidationDateTooSoonError:
+                        msg = [NSString stringWithFormat:@"Unrecoverable error: the date of the attribute '%@' is too soon.", attributeName];
+                        break;
+                    case NSValidationInvalidDateError:
+                        msg = [NSString stringWithFormat:@"Unrecoverable error: the date of the attribute '%@' is invalid.", attributeName];
+                        break;
+                    case NSValidationStringTooLongError:
+                        msg = [NSString stringWithFormat:@"Unrecoverable error: the text of the attribute '%@' is too long.", attributeName];
+                        break;
+                    case NSValidationStringTooShortError:
+                        msg = [NSString stringWithFormat:@"Unrecoverable error: the text of the attribute '%@' is too short.", attributeName];
+                        break;
+                    case NSValidationStringPatternMatchingError:
+                        msg = [NSString stringWithFormat:@"Unrecoverable error: the text of the attribute '%@' doesn't match the required pattern.", attributeName];
+                        break;
+                    default:
+                        msg = [NSString stringWithFormat:@"Unrecoverable error: Unknown error (code %i).", [error code]];
+                        break;
+                }
+                
+                messages = [messages stringByAppendingFormat:@"%@%@%@\n", (entityName?:@""),(entityName?@": ":@""),msg];
+            }
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Validation Error"
+                                                            message:messages
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+            [alert show];
         }
     }
 }
@@ -285,7 +374,8 @@
          Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
          
          */
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        // NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        [self displayValidationError:error];
         abort();
     }
     

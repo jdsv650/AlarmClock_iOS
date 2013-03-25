@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MMAlarmDetails.h"
 
-@interface SnoozeViewController : UIViewController
+@interface SnoozeViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property MMAlarmDetails *myAlarm;
 
