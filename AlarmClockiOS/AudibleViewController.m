@@ -52,41 +52,51 @@
         myNewAlarm = avc.myNewAlarm;
     }
     
-    sounds = [[NSArray alloc] initWithObjects:@"Alarm Clock", @"Car Alarm", @"Evacuate", @"Rooster", @"Tornado Siren", nil];
+    sounds = [[NSArray alloc] initWithObjects:@"Audible Off", @"Alarm Clock", @"Car Alarm", @"Evacuate", @"Rooster", @"Tornado Siren", nil];
     
     volumeOutlet.value = myNewAlarm.alarmVolume;
+    
     if(myNewAlarm.alarmVolume == 0)
     {
        volumeOnOffOutlet.on = NO;
        audibleImageViewOutlet.image = [UIImage imageNamed:@"bell_off.png"];
     }
     else
-         audibleImageViewOutlet.image = [UIImage imageNamed:@"bell.png"];
-
-    int num = 0;
-    if([[myNewAlarm alarmSound] isEqualToString:@"Alarm Clock"])
+    {
+        volumeOnOffOutlet.on = YES;
+        audibleImageViewOutlet.image = [UIImage imageNamed:@"bell.png"];
+    }
+    
+    int num = 1;
+    
+    if([[myNewAlarm alarmSound] isEqualToString:@"Audible Off"])
     {
         num = 0;
     }
     else
-        if([[myNewAlarm alarmSound] isEqualToString:@"Car Alarm"])
+        if([[myNewAlarm alarmSound] isEqualToString:@"Alarm Clock"])
     {
         num = 1;
     }
     else
-        if([[myNewAlarm alarmSound] isEqualToString:@"Evacuate"])
+        if([[myNewAlarm alarmSound] isEqualToString:@"Car Alarm"])
     {
         num = 2;
     }
     else
-        if([[myNewAlarm alarmSound] isEqualToString:@"Rooster"])
+        if([[myNewAlarm alarmSound] isEqualToString:@"Evacuate"])
     {
         num = 3;
     }
     else
-        if([[myNewAlarm alarmSound] isEqualToString:@"Tornado Siren"])
+        if([[myNewAlarm alarmSound] isEqualToString:@"Rooster"])
     {
         num = 4;
+    }
+    else
+        if([[myNewAlarm alarmSound] isEqualToString:@"Tornado Siren"])
+    {
+        num = 5;
     }
 
     [soundPickerOutlet selectRow:num inComponent:0 animated:YES];
@@ -114,7 +124,20 @@
 //delegate
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    myNewAlarm.alarmSound = [sounds objectAtIndex:row];
+     myNewAlarm.alarmSound = [sounds objectAtIndex:row];
+    
+    if(row == 0)
+    {
+        volumeOnOffOutlet.on = NO;
+        audibleImageViewOutlet.image = [UIImage imageNamed:@"bell_off.png"];
+        myNewAlarm.alarmVolume = 0.0f;
+    }
+    else
+    {
+        volumeOnOffOutlet.on = YES;
+        audibleImageViewOutlet.image = [UIImage imageNamed:@"bell.png"];
+        myNewAlarm.alarmVolume = 0.5f;
+    }
 }
 
 
@@ -131,12 +154,14 @@
         volumeOutlet.value = 0.5f;
         myNewAlarm.alarmVolume = 0.5f;
         audibleImageViewOutlet.image = [UIImage imageNamed:@"bell.png"];
+        [soundPickerOutlet selectRow:1 inComponent:0 animated:YES];
     }
     else
     {
         volumeOutlet.value = 0.0f;
         myNewAlarm.alarmVolume = 0.0f;
         audibleImageViewOutlet.image = [UIImage imageNamed:@"bell_off.png"];
+        [soundPickerOutlet selectRow:0 inComponent:0 animated:YES];
     }
 }
 

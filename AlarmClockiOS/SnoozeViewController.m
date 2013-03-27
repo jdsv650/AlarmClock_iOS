@@ -87,11 +87,13 @@
     {
         snoozeSwitch.on = NO;
         snoozeImageViewOutlet.image = [UIImage imageNamed:@"link_break_off.png"];
+        myAlarm.isSnoozeEnabled = NO;
     }
     else
     {
         snoozeSwitch.on = YES;
         snoozeImageViewOutlet.image = [UIImage imageNamed:@"link_break.png"];
+        myAlarm.isSnoozeEnabled = YES;
     }
 }
 

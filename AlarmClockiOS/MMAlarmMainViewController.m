@@ -179,9 +179,18 @@
 //        soundFilePath = [NSString stringWithFormat:@"%@/Tornado_Siren.mp3", [[NSBundle mainBundle] resourcePath]];
     
     //build file name as string
-    NSString *nameWithUnderscore = [[[alarms lastObject] alarmSound] stringByReplacingOccurrencesOfString:@" " withString:@"_"];
-    NSString *soundFileString  = [NSString stringWithFormat:@"%@/%@.mp3", [[NSBundle mainBundle] resourcePath], nameWithUnderscore];
+    NSString *soundFileString;
     
+    if([[[alarms objectAtIndex:nextAlarmNum] alarmSound] isEqualToString:@"Audible Off"])
+    {
+        soundFileString = [NSString stringWithFormat:@"%@/silence_20.mp3", [[NSBundle mainBundle] resourcePath]];
+    }
+    else
+    {
+        NSString *nameWithUnderscore = [[[alarms lastObject] alarmSound] stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+        soundFileString  = [NSString stringWithFormat:@"%@/%@.mp3", [[NSBundle mainBundle] resourcePath], nameWithUnderscore];
+    }
+        
     //file name as URL
     NSURL *soundFileURL = [NSURL fileURLWithPath:soundFileString];
     
@@ -231,8 +240,7 @@
     isAlarmActive = NO;
     
     //turn off flashlight if on
-    if(isTorchOn)
-        [self toggleFlashlight:NO];
+    [self toggleFlashlight:NO];
     
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     if([title isEqualToString:@"OFF"])
@@ -288,7 +296,7 @@
     myNewAlarm.snoozeDuration = 10;
     myNewAlarm.alarmMessage =  @"";
     myNewAlarm.isSetToFlash = NO;
-    myNewAlarm.isSetToVibrate = NO;
+    myNewAlarm.isSetToVibrate = YES;
 }
 
 - (IBAction)nextAlarmPressed:(id)sender

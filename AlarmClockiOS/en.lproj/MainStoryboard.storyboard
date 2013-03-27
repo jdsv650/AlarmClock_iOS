@@ -27,7 +27,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Alarm Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tcl-s2-9TY">
-                                <rect key="frame" x="116" y="86" width="104" height="28"/>
+                                <rect key="frame" x="116" y="89" width="104" height="25"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -64,7 +64,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SP4-R8-BZu">
-                                <rect key="frame" x="77" y="25" width="167" height="44"/>
+                                <rect key="frame" x="77" y="20" width="167" height="44"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title=" Remove" image="control_eject.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -133,13 +133,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Volume" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Y3I-P7-7XC">
-                                <rect key="frame" x="26" y="44" width="86" height="28"/>
+                                <rect key="frame" x="20" y="26" width="86" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="bVu-eB-y9h">
-                                <rect key="frame" x="184" y="47" width="118" height="23"/>
+                                <rect key="frame" x="184" y="29" width="118" height="23"/>
                                 <connections>
                                     <action selector="volumeChanged:" destination="3" eventType="valueChanged" id="RMs-e6-dl5"/>
                                 </connections>
@@ -148,8 +148,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <rect key="frame" x="160" y="409" width="40" height="40"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="volume_control_icon.png" id="JRr-pZ-ECl">
-                                <rect key="frame" x="140" y="38" width="40" height="40"/>
+                                <rect key="frame" x="138" y="20" width="40" height="40"/>
                             </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Alarm Sound" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WwU-jZ-nY3">
+                                <rect key="frame" x="112" y="68" width="136" height="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -175,7 +181,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <viewController id="NxB-EV-Tvi" customClass="VisualVibrateViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Aec-J7-LOQ">
                         <rect key="frame" x="0.0" y="20" width="320" height="499"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Alarm Message" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XxX-2q-Yty">
                                 <rect key="frame" x="20" y="126" width="139" height="27"/>
@@ -225,6 +231,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Audible Alarm On - Vibrate Locked" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UnV-4s-wxs">
+                                <rect key="frame" x="20" y="295" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -233,6 +246,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <connections>
                         <outlet property="flashlightImageViewOutlet" destination="sVc-Gl-864" id="9EB-Yf-f8M"/>
                         <outlet property="flashlightSwitch" destination="aoW-Q7-t0V" id="x0R-e2-o6F"/>
+                        <outlet property="lockedLabelOutlet" destination="UnV-4s-wxs" id="po8-4O-pwh"/>
                         <outlet property="messageTextField" destination="ngU-aD-Lev" id="I1Y-Dm-V9Z"/>
                         <outlet property="vibrateImageViewOutlet" destination="6wl-yx-Ffp" id="m6B-aU-rI7"/>
                         <outlet property="vibrateSwitch" destination="aXN-NB-v21" id="mZk-bS-7JY"/>
@@ -263,7 +277,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </switch>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Snooze Interval" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7iP-4a-oE0">
-                                <rect key="frame" x="85" y="65" width="151" height="24"/>
+                                <rect key="frame" x="85" y="66" width="151" height="25"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -513,6 +527,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="action" name="throwVibrateSwitch:"/>
                 <relationship kind="outlet" name="flashlightImageViewOutlet" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="flashlightSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="lockedLabelOutlet" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="messageTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="vibrateImageViewOutlet" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="vibrateSwitch" candidateClass="UISwitch"/>

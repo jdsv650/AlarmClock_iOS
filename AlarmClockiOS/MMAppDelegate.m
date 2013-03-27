@@ -112,60 +112,53 @@
     {
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
         
-        //set next alarm as UILocalNotification (purge these on foreground)
+        // set next alarm as UILocalNotification (purge these on foreground)
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
         localNotification.timeZone = [NSTimeZone defaultTimeZone];
         localNotification.fireDate = [[alarms lastObject] alarmDateTime];
-       // localNotification.repeatInterval = NSMinuteCalendarUnit;
+        localNotification.repeatInterval = NSMinuteCalendarUnit;
+        localNotification.alertAction = @"Dismiss Alarm";
+        
+        // 2nd notification (20sec on 10 off then 20sec on and 10 off with second notiification)
+        UILocalNotification *localNotification2 = [[UILocalNotification alloc] init];
+        localNotification2.timeZone = [NSTimeZone defaultTimeZone];
+        localNotification2.fireDate = [[[alarms lastObject] alarmDateTime] dateByAddingTimeInterval:30];
+        localNotification2.repeatInterval = NSMinuteCalendarUnit;
+        localNotification2.alertAction = @"Dismiss Alarm";
         
         NSString *soundName;
         
         // no sound and vibrate on (vibrate only) use silent sound for vib 
-        if([[alarms lastObject] alarmVolume] == 0 && [[alarms lastObject] isSetToVibrate] == YES)
+        if([[[alarms lastObject] alarmSound] isEqual: @"Audible Off"] && [[alarms lastObject] isSetToVibrate] == YES)
         {
             soundName = @"silence_20.mp3";
-            localNotification.soundName = soundName;
-            localNotification.repeatInterval = NSMinuteCalendarUnit;
         }
-        else if([[alarms lastObject] alarmVolume] == 0 && [[alarms lastObject] isSetToVibrate] == NO)   //no sound or vib
+        else
+            if([[[alarms lastObject] alarmSound] isEqual: @"Audible Off"] && [[alarms lastObject] isSetToVibrate] == NO)  //no sound or vib
         {
-             //localNotification.soundName should not be set
-             //reset repeatinterval to show message every second
-            localNotification.repeatInterval = NSSecondCalendarUnit;
-            
+            soundName = nil;
         }
         else   //play sound (+ will vibrate)
         {
             NSString *temp = [[[alarms lastObject] alarmSound] stringByReplacingOccurrencesOfString:@" " withString:@"_"];
             soundName = [temp stringByAppendingString:@"_20.mp3"];
-              localNotification.repeatInterval = NSMinuteCalendarUnit;
         }
         
-        // localNotification.soundName = UILocalNotificationDefaultSoundName;
+        localNotification.soundName = soundName;
+        localNotification2.soundName = soundName;
         
         NSString *msg = [[alarms lastObject] alarmMessage];
-        if([msg compare:@""] == 0){
+        if([msg compare:@""] == 0)
+        {
             msg = @"Alarm Active"; //needed for notification to display
         }
-        localNotification.alertBody = msg;//@"Wake up";
-        localNotification.alertAction = @"View";
+        
+        localNotification.alertBody = msg;
+        localNotification2.alertBody = msg;
         
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-        
-        if(localNotification.repeatInterval == NSMinuteCalendarUnit)  //else no need for second notif
-        {
-            // 2nd notification (20sec on 10 off then 20sec on and 10 off with second notiification)
-            UILocalNotification *localNotification2 = [[UILocalNotification alloc] init];
-            localNotification2.timeZone = [NSTimeZone defaultTimeZone];
-            localNotification2.fireDate = [[[alarms lastObject] alarmDateTime] dateByAddingTimeInterval:30];
-            localNotification2.repeatInterval = NSMinuteCalendarUnit;
-            localNotification2.soundName = soundName;
-            localNotification2.alertBody = msg;
-            localNotification2.alertAction = @"View";
-            [[UIApplication sharedApplication] scheduleLocalNotification:localNotification2];
-        }
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification2];
     }
-    
 }
 
 - (void)saveAlarms
