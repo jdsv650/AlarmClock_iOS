@@ -117,16 +117,11 @@
 
 -(void)becameActive
 {
-    if(alarms.count >= 1 && [[alarms lastObject] isSetToFlash])
-    {
-        [self toggleFlashlight:YES];
-    }
 }
 
 
 -(void)becameBackground
 {
-   
 }
 
 - (void)toggleFlashlight:(BOOL) isOn
