@@ -12,13 +12,17 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>alarm_clk_standard.png</string>
-				<string>alarm_clk_retina.png</string>
+				<string>alarm_clk_icon@2x.png</string>
+				<string>alarm_clk_icon.png</string>
+				<string>alarm_clk_ico.png</string>
+				<string>alarm_clk_ico@2x.png</string>
+				<string>Icon.png</string>
+				<string>Icon@2x.png</string>
 			</array>
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>jdsv650.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.jdsv650.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
